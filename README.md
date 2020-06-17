@@ -1,6 +1,6 @@
 
 # Music Mate
-![Logo](https://imgur.com/xq3fT9c.png =250x250)
+<img src="https://imgur.com/xq3fT9c.png" height="250" width="250">
 
 Not just another desktop music player.
 
@@ -11,8 +11,13 @@ Why store this information? Well, I don't know about you but I'm too broke for S
 
 And why not just use a standard song queue system like media request in StreamElements and limit it to playlists you made, for example? Yeah you can do that. I just wanted something local :)
 
-![Generic Screen](https://imgur.com/NxyxjWH.png =600x520)
+<img src="https://imgur.com/NxyxjWH.png" width="600" height="520">
 **Note:** I am not the world's best designer, it'll be worked on I promise
+
+# IMPORTANT
+
+I didn't sign any of the release binaries because that's way too expensive for my budget at the moment to keep up with. The code is here, you can see it in all it's glory and safety. If Windows doesn't let you install even with security disabled and stuff, you can rebuild it locally I guess.
+
 # Usage
 
 ### Adding A Song
@@ -22,7 +27,7 @@ If the file has metadata for its title and artist, it will be automatically fill
 
 If the file or title is missing, or a song with the same title already exists in the playlist you are trying to add it to, you will be unable to add it. Select the file and use and modify the title.
 
-![Add Song Dialog 1](https://imgur.com/9fzkiGn.png =600x520) ![Add Song Dialog 2](https://imgur.com/oHYfvkl.png =600x520)
+<img src="https://imgur.com/9fzkiGn.png" width="600" height="520"> <img src="https://imgur.com/oHYfvkl.png" width="600" height="520">
 
 ### Creating New Playlist & Switching Playlists
 Click the **New Playlist** button to open the dialog for creating a new playlist.
@@ -31,7 +36,7 @@ Enter in a unique name for the playlist and hit Create. You can additionally pre
 
 To switch playlists, open the playlist selector on the top left.
 
-![Create & Switch Playlist](https://imgur.com/7RtgVpz.gif =600x520)
+<img src="https://imgur.com/7RtgVpz.gif" width="600" height="520">
 
 ### Removing Songs From Playlist & Deleting Playlists
 To remove a song from a playlist, set that playlist active and **right click** on any song in the playlist queue and click remove.
@@ -54,7 +59,8 @@ It does output to TXT Files, including one configurable file.
 The padding value at the top indicates how many spaces the `padding` variable consists of. This is prefixed to each non-custom text file for ease of life usage with OBS.
 
 Each file URL can be copied by clicking the copy icon in each section, and each section indicates what value you are getting back.
-![Meta1](https://imgur.com/H33Mre7.png =600x520)
+
+<img src="https://imgur.com/H33Mre7.png" width="600" height="520">
 
 The custom file can use the following variables to create a custom message. Any text is permitted here, but the variables indicated below will be replaced by their real-data counterpart.
 
@@ -65,7 +71,7 @@ The custom file can use the following variables to create a custom message. Any 
 | {playlistname} | Playlist Name  |
 | {padding}      | Padding Amount |
 
-![Meta2](https://imgur.com/oKTm1pX.png =600x520)
+<img src="https://imgur.com/oKTm1pX.png" width="600" height="520">
 
 ## Using MetaData Files In OBS
 To use the metadata files, first copy one of them by clicking the copy icon in the metadata settings menu.
