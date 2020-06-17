@@ -153,8 +153,13 @@ or
 ## Built Using
 
 Node: v12.16.1
+
 NPM: 6.13.4
+
 Angular CLI: 9.1.7
+
 Angular Material: 9.2.4
+
 Electron: 9.0.3
+
 Electron Forge: 6.0.0-beta.51
