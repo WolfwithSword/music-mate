@@ -1,0 +1,126 @@
+@use "../../styles";
+
+.dialog{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.playlist-menu {
+    background-color: map-get(map-get(styles.$app-theme, background), background);
+    padding: 4pt;
+    font-size: 10pt !important;
+    z-index: 1000;
+    box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
+    border-radius: 4pt;
+    padding: 0.5em 0 0.5em 0;
+    opacity:1.0;
+    display:block;
+}
+
+button.mat-icon-button .mat-icon {
+  outline: none !important;
+  font-size: 1.25em !important;
+}
+
+.mat-menu-item:focus{
+  outline: none !important;
+}
+
+.mat-menu-item{
+  outline: none !important;
+}
+
+.titlebar {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  height: 30px!important;
+  position:absolute;
+  box-shadow: 0 0 5px black;
+}
+
+.titlebar-button {
+    outline: none !important;
+    -webkit-app-region: no-drag;
+    margin-right: 10%;
+}
+
+.titlebar-buttons {
+    right: 25px;
+    top: -4px;
+    position: fixed;
+}
+
+.titlebar-name {
+    left: -12px;
+    position: relative;
+    top: -2px;
+}
+
+.titlebar-logo {
+    margin-right: 8px;
+    magin-bottom: 4px;
+}
+
+.menu-content {
+    left: 36px;
+    top: 20px;
+    position: absolute;
+}
+
+.choose-pl{
+    top:20px; 
+    left:40px; 
+    z-index:1000;    
+}
+
+.menu-header {
+    height: 80px!important;
+}
+
+.menu-buttons {
+    margin-top: 15px;
+    float: right;
+}
+.menu-buttons button{
+    margin-right: 20px;
+}
+
+.menu-icon {
+    outline:none;
+}
+
+.no-select {
+    -webkit-user-select: none;
+}
+
+.tbb-icon {
+    outline: none !important;
+    font-size: 0.8em !important;
+    vertical-align: text-top !important;
+}
+
+.tbb-iconsizer {
+    font-size: 1.8em !important;
+}
+.hamburger {
+    font-size: 2em !important;
+}
+.tbpl-icon {
+  font-size: 2em !important;
+  vertical-align: text-top !important;
+  top: 44px;
+  position: absolute;
+}
+
+.mat-option {
+    line-height: 2.4em!important;
+    height: 2.4em!important;
+    font-size:0.9em!important;
+}
+
+button.mat-icon-button .mat-icon .tb-icon {
+  vertical-align: top;
+  font-size: 1em;
+}

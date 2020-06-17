@@ -1,0 +1,86 @@
+<h2 mat-dialog-title>Metadata Settings</h2>
+<mat-dialog-content class="text">
+
+    <div class="row padding-info">
+        <div class="col">
+            Set number of spaces to pad in front of each file's content.
+        </div>
+        <div class="col">
+            <mat-form-field style="width:80px">
+                <mat-label>Padding</mat-label>
+                    <input matInput type="number" [(ngModel)]="settings.padAmt" (change)="updateSettings()" placeholder="8" name="padding" min="0"/>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar ><button mat-icon-button [cdkCopyToClipboard]="copyURL('songName')"><mat-icon inline=true color="accent">content_copy</mat-icon></button></div>
+            <mat-card-title>Song Name</mat-card-title>
+            <mat-card-subtitle>Copy URL for the current Song Name</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar ><button mat-icon-button [cdkCopyToClipboard]="copyURL('songArtist')"><mat-icon inline=true color="accent">content_copy</mat-icon></button></div>
+            <mat-card-title>Song Artist</mat-card-title>
+            <mat-card-subtitle>Copy URL for the current Song Artist</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar ><button mat-icon-button [cdkCopyToClipboard]="copyURL('songInfo')"><mat-icon inline=true color="accent">content_copy</mat-icon></button></div>
+            <mat-card-title>Song Info</mat-card-title>
+            <mat-card-subtitle>Copy URL for the current Song Name + Song Artist</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar ><button mat-icon-button [cdkCopyToClipboard]="copyURL('playlistName')"><mat-icon inline=true color="accent">content_copy</mat-icon></button></div>
+            <mat-card-title>Playlist Name</mat-card-title>
+            <mat-card-subtitle>Copy URL for the current Playlist Name</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card class="custom-url-card">
+        <mat-card-header>
+            <div mat-card-avatar ><button mat-icon-button [cdkCopyToClipboard]="copyURL('custom')"><mat-icon inline=true color="accent">content_copy</mat-icon></button></div>
+            <mat-card-title>Custom</mat-card-title>
+            <mat-card-subtitle>Copy URL for Custom String</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <p><b>Variables</b></p>
+            <p>You can use the following variables along with any other text to create a custome message.</p>
+            <p>Note: Whitespaces will not be trimmed. This file does not start with padding by default.</p>
+            <mat-grid-list class="variable-list" cols="2" rowHeight="7:1">
+                <mat-grid-tile>
+                    <b>Variable</b>
+                </mat-grid-tile>
+                <mat-grid-tile>
+                    <b>Value</b>
+                </mat-grid-tile>
+                <ng-container *ngFor="let v of Object.keys(variables)">
+                    <mat-grid-tile>
+                        {{'{' + v + '}'}}
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                        {{variables[v]}}
+                    </mat-grid-tile>
+                </ng-container>
+            </mat-grid-list>
+            <form class="input-form">
+              <mat-form-field class="input-full-width">
+                <mat-label>Custom String</mat-label>
+                <textarea class="text-custom" matInput [(ngModel)]="settings.customString" (change)="updateSettings()" placeholder="Ex: Now Playing: {songname} by {songartist}" name="custom"></textarea>
+              </mat-form-field>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-raised-button [mat-dialog-close]="true" color="accent">Close</button>
+</mat-dialog-actions>

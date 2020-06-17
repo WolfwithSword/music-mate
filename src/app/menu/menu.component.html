@@ -1,0 +1,50 @@
+<mat-toolbar class="header titlebar mat-elevation-z5">
+    <div class="row mt-2 ml-2">
+        <span class="titlebar-name"><img class="titlebar-logo" src="assets/musicmate_logo.png" width="24px" height="24px">Music Mate</span>
+        <div class="titlebar-buttons">
+            <button class="titlebar-button" mat-icon-button (click)="minimizeApp()"><mat-icon inline=true color="accent" >minimize</mat-icon></button>
+            <button class="titlebar-button" mat-icon-button  (click)="maximizeApp()"><mat-icon inline=true color="accent">{{!getIsMaximized() ? 'crop_3_2' : 'filter_none' }}</mat-icon></button>
+            <button class="titlebar-button" mat-icon-button (click)="closeApp()" ><mat-icon inline=true color="accent">close</mat-icon></button>
+        </div>
+    </div>
+</mat-toolbar>
+
+<mat-toolbar color="primary" class="header mat-elevation-z4 menu-header">
+    <mat-icon inline=true color="accent" class="no-select tbpl-icon">playlist_play</mat-icon>
+    <mat-form-field *ngIf="allPlaylists != []" class="choose-pl">
+        <!--<mat-label>Playlist</mat-label>-->
+        <mat-select [(ngModel)]="currentPlaylist"
+                    [compareWith]="comparePLByName"
+                    (ngModelChange)="changePlaylist($event)"
+                    name="playlist">
+            <mat-option *ngFor="let playlist of allPlaylists"
+                        (contextmenu)="onContextMenu($event, playlist)"
+                        [value]="playlist">
+                    {{playlist.name}}
+            </mat-option>
+        </mat-select>
+        <div style="visibility: hidden; position: fixed"
+            [style.left]="contextMenuPosition.x"
+            [style.top]="contextMenuPosition.y"
+            [matMenuTriggerFor]="contextMenu">
+        </div>
+        <mat-menu #contextMenu="matMenu">
+          <ng-template matMenuContent let-playlist="playlist">
+            <button mat-menu-item (click)="changePlaylist(playlist)">Open Playlist</button>
+            <button mat-menu-item *ngIf="playlist.name != 'Default'"
+                        (click)="removePlaylist(playlist)">Delete Playlist {{playlist.name}}</button>
+          </ng-template>
+        </mat-menu>
+    </mat-form-field>
+    <span class="nav-tool-items">
+            <div class="row menu-content" >
+                <div class="col float-right" style="position: fixed">
+                    <div class="menu-buttons float-right">
+                        <button mat-raised-button class="tbb-icon" (click)="openAddSongModal()" ><mat-icon inline=true class="tbb-iconsizer" color="accent">playlist_add</mat-icon> Add Song</button>
+                        <button mat-raised-button class="tbb-icon" (click)="createPlaylist()"><mat-icon inline=true color="accent" class="tbb-iconsizer" >add</mat-icon> New Playlist</button>
+                        <button mat-icon-button class="menu-icon" (click)="openMenu()"><mat-icon inline=true color="accent" class="hamburger tbb-iconsizer">menu</mat-icon></button>
+                    </div>
+                </div>
+            </div>
+    </span>
+</mat-toolbar>

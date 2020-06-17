@@ -1,0 +1,19 @@
+@use "../../styles";
+
+.mat-dialog-actions{
+    justify-content: flex-end;
+}
+
+.tr {
+    margin-top: 20px;
+}
+
+.input-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-width {
+  width: 100%;
+}

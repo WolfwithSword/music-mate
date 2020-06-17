@@ -1,0 +1,41 @@
+@import '~@angular/material/_theming';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-blue-grey, #212121, #484848, #000000);
+$app-accent:  mat-palette($mat-blue-grey, #484848, 200, A100);//700);//, A200, A100, A400);
+$app-warn: mat-palette($mat-blue, A100);
+$app-theme:   mat-dark-theme($app-primary, $app-accent, $app-warn);
+
+@include angular-material-theme($app-theme);
+
+
+$app-accent-blue:  mat-palette($mat-light-blue, A200, A100, A400);
+/*
+
+
+$dark-primary: mat-palette($mat-blue-grey, 700, 500, 900);
+$dark-accent:  mat-palette($mat-light-blue, A200, A100, A400);
+$dark-warn:    mat-palette($mat-red);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+
+
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+}
+
+$light-primary: mat-palette($mat-light-blue, 700, 300, 900);
+$light-accent: mat-palette($mat-light-blue, A400);
+$light-warn: mat-palette($mat-deep-orange, 200);
+$light-theme: mat-light-theme($light-primary, $light-accent, $light-warn);
+
+.light-theme {
+  @include angular-material-theme($light-theme)
+}*/
+
+html, body { height: 100%; overflow:hidden; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

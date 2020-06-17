@@ -1,0 +1,88 @@
+@use "../../styles";
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.dialog{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.song-menu {
+  background-color: map-get(map-get(styles.$app-theme, background), background);
+  padding: 4pt;
+  font-size: 10pt;
+  z-index: 1000;
+  box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25);
+  border-radius: 4pt;
+  padding: 0.5em 0 0.5em 0;
+  opacity:1.0;
+  display:block;
+}
+
+
+.media_icons .playable {
+    padding-right: 8px;
+}
+
+.media_icons .media_action {
+    padding-left: 10px;
+}
+
+.media_icons:focus {
+    outline: none !important;
+}
+
+button.mat-icon-button .mat-icon {
+  vertical-align: top;
+  font-size: 2.75em;
+}
+
+.mat-icon {
+  vertical-align: top;
+  font-size: 2.75em;
+}
+
+.mat-list-option, .mat-list-item-content, .mat-list-item-ripple{
+  min-height: 48px!important;
+  height: auto!important;
+  box-shadow: 0 0 4pt rgba(0, 0, 0, 0.25)!important;
+}
+
+.mat-list-text {
+    margin-top: auto!important;
+    margin-bottom: auto!important;
+    vertical-align:middle !important;
+}
+
+.mat-selection-list {
+    box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25)!important;
+}
+
+.song-options {
+    box-shadow: none!important;
+}
+.song-option {
+    box-shadow: none!important;
+}
+
+.playlist {
+    max-height: 90%!important;
+    min-height: 200px;
+    overflow-y: auto!important;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    height: 50% !important;
+    max-width:80%;
+    box-shadow: inset 0 0 2pt rgba(0,0,0,0.3)!important;
+    border-radius: 8px!important;
+    position:fixed;
+}
+
+.mat-menu-item:focus{
+  outline: none !important;
+}
+
+.mat-menu-item{
+  outline: none !important;
+}

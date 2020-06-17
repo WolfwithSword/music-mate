@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>Add New Song</h2>
+<mat-dialog-content class="text">
+
+    <mat-grid-list cols="2" rowHeight="4:1">
+        <mat-grid-tile class="grid-label">
+            <div style="width:100%">
+                Select Song
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-value">
+            <div style="width:100%">
+                <button (click)="openFileDialog()" mat-raised-button color="accent">Choose Song</button>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="2">
+            <b>{{selectedSong}}</b>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-label">
+            <div style="width:100%">
+                Song Name
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-value">
+            <div style="width:100%">
+                <form class="input-form">
+                  <mat-form-field class="input-full-width">
+                    <mat-label>Song Name</mat-label>
+                    <textarea matInput [(ngModel)]="song.title" placeholder="Name..." name="title"></textarea>
+                  </mat-form-field>
+                </form>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-label">
+            <div style="width:100%">
+                Artist
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-value">
+            <div style="width:100%">
+                <form class="input-form">
+                  <mat-form-field class="input-full-width">
+                    <mat-label>Artist (optional)</mat-label>
+                    <textarea matInput [(ngModel)]="song.artist" placeholder="Artist..." name="artist"></textarea>
+                  </mat-form-field>
+                </form>
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-label">
+            <div style="width:100%">
+                Choose Playlist
+            </div>
+        </mat-grid-tile>
+        <mat-grid-tile class="grid-value">
+            <div style="width:100%">
+                <mat-form-field *ngIf="allPlaylists != []">
+                    <mat-label>Playlist</mat-label>
+                    <mat-select [(ngModel)]="currentPlaylistName" name="playlist">
+                        <mat-option (click)="changePlaylist(playlist)" *ngFor="let playlist of allPlaylists" [value]="playlist.name">
+                            {{playlist.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button (click)="addSong()"  [disabled]="isNotCompleted() ? true: null" mat-raised-button
+    [mat-dialog-close]="isNotCompleted() ? 'null' : 'true'"  color="accent">{{isNotCompleted() ? 'Not Completed' : 'Add'}}</button>
+  <button mat-raised-button [mat-dialog-close]="true" color="accent">Cancel</button>
+</mat-dialog-actions>

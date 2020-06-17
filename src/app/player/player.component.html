@@ -1,0 +1,82 @@
+<div *ngIf="activeSong != null" class="ui container center-screen">
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-12"><h5>{{ activeSong[0]?.artist }}</h5><h2>{{activeSong[0]?.title}}</h2></div>
+    </div>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 text-left">
+                        {{ currentTime$ | async }}
+                    </div>
+                    <div class="col-6 text-right" *ngIf="player?.duration">
+                        {{ durationTime }}
+                    </div>
+                </div>
+            </div>
+            <mat-progress-bar color="accent" mode="determinate" [(value)]="progressVal" name="songProgress" ngDefaultControl>
+            </mat-progress-bar>
+            <br>
+            <div class="row ml-1">
+
+                <div class="col">
+                    <div class="row">
+                        <button mat-icon-button class="media_icons"><mat-icon inline=true class="media_icon" color="accent" (click)="toggleVolume()">
+                            {{getVolumeIcon()}}
+                            </mat-icon></button>
+                        <mat-slider #volSlider [(ngModel)]="songVolume" (input)="songVolume=$event.value;" (click)="isTMuted=false" step="1" min="0" max="100"></mat-slider>
+                    </div>
+                </div>
+
+                <div class="col center-block text-center d-flex justify-content-center">
+                    <button mat-icon-button class="media_icons playable"><mat-icon inline=true class="media_icon" color="accent" (click)="playPreviousSong()">skip_previous</mat-icon></button>
+                    <button mat-icon-button class="media_icons playable"><mat-icon inline=true class="media_icon" color="accent" (click)="isPlaying ? player.pause() : player.play()">{{isPlaying ? 'pause' : 'play_arrow'}}</mat-icon></button>
+                    <button mat-icon-button class="media_icons playable"><mat-icon inline=true class="media_icon" color="accent" (click)="playNextSong()">skip_next</mat-icon></button>
+                </div>
+
+                <div class="col media_actions float-right text-right">
+                    <button mat-icon-button class="media_icons media_action"><mat-icon inline=true class="media_icon" [color]="toggleLoop ? 'warn' : 'accent'" (click)="toggleLoop = !toggleLoop">loop</mat-icon></button>
+                    <button mat-icon-button class="media_icons media_action"><mat-icon inline=true class="media_icon" color="accent" (click)="shuffleSongs()">shuffle</mat-icon></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<audio #player (loadeddata)="onTimeUpdate()" [volume]="songVolume/100" (timeupdate)="onTimeUpdate()" (ended)="onEnded($event)" (play)="onPlay($event)" (pause)="onPause($event)">
+</audio>
+<div class="ui container center-screen">
+    <div class="row justify-content-center">
+        <div class="col-12 playlist justify-content-center">
+                <mat-selection-list *ngIf="playlist != null" #plSongs [(ngModel)]="activeSong" [multiple]="false">
+                  <mat-list-option (click)="playSong(song)" (contextmenu)="onContextMenu($event, song)" *ngFor="let song of playlist.songs" [value]="song">
+                        <div class="row">
+                            <div class="col-4 text-left float-left  align-self-center">
+                                {{song.title}}
+                            </div>
+                            <div class="col-4 text-center float-center  align-self-center">
+                                {{song.artist}}
+                            </div>
+                            <div class="col text-right float-right align-self-center">
+                                {{song.duration}}
+                            </div>
+                        </div>
+                  </mat-list-option>
+                </mat-selection-list>
+                <div style="visibility: hidden; position: fixed"
+                    [style.left]="contextMenuPosition.x"
+                    [style.top]="contextMenuPosition.y"
+                    [matMenuTriggerFor]="contextMenu">
+                </div>
+                <mat-menu #contextMenu="matMenu">
+                  <ng-template matMenuContent let-song="song">
+                    <button mat-menu-item (click)="playSong(song)">Play</button>
+                    <button mat-menu-item (click)="removeSongFromPlaylist(song)">Remove {{song.title}}</button>
+                  </ng-template>
+                </mat-menu>
+        </div>
+    </div>
+</div>

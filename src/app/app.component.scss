@@ -1,0 +1,102 @@
+@use "../styles";
+
+::ng-deep .mat-slider {
+    width: 80%;
+    top: -5px;
+}
+::ng-deep .mat-slider.mat-slider-horizontal .mat-slider-track-fill {
+  background-color: map-get(styles.$app-accent-blue, A200);
+}
+
+::ng-deep .mat-accent .mat-slider-thumb {
+  background-color: map-get(styles.$app-accent-blue,A400);
+}
+
+::ng-deep .mat-slider-thumb-label {
+  background-color: map-get(styles.$app-accent-blue, A300);
+}
+
+::ng-deep .mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
+  background-color: map-get(styles.$app-accent-blue,A300);
+}
+
+::ng-deep .mat-progress-bar {
+    height: 8px !important;
+    border-radius: 8px !important;
+    margin-top: 8px !important;
+}
+::ng-deep .mat-progress-bar .mat-progress-bar-fill::after {
+    background-color: map-get(styles.$app-accent-blue,A400) !important;
+    color: map-get(styles.$app-accent-blue,A200) !important;
+}
+
+
+::ng-deep .mat-progress-bar .mat-progress-bar-buffer::after {
+    background-color: map-get(styles.$app-accent-blue,100) !important;
+    background: map-get(styles.$app-accent-blue,100) !important;
+}
+
+::ng-deep .titlebar {
+    background-color: #121212!important;
+}
+
+::ng-deep ::-webkit-scrollbar-track {
+    -webkit-box-shadow:  0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: map-get(styles.$app-accent, 100);
+}
+
+::ng-deep ::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 12px;
+    -webkit-box-shadow:  inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: map-get(styles.$app-accent, 100);
+}
+
+::ng-deep ::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+::ng-deep .mat-dialog-content {
+    background-color: #303030;
+    box-shadow: inset 0 0 8pt rgba(0, 0, 0, 0.25)!important;
+    border: 1px solid rgba(0, 0, 0, 0.35)!important;
+    min-height: 600px !important;
+}
+
+::ng-deep .mat-dialog-container {
+    overflow: none;
+    max-width: 700px !important;
+    min-height: 730px !important;
+    min-width: 700px !important;
+    min-height: 730px !important;
+}
+::ng-deep .mat-dialog-actions {
+    justify-content: flex-end;
+}
+
+::ng-deep .mat-button:focus {
+    outline: none !important;
+}
+
+::ng-deep .mat-raised-button {
+    outline: none !important;
+}
+
+::ng-deep .mat-raised-button:focus {
+    outline: none !important;
+}
+
+::ng-deep .mat-button {
+    outline: none !important;
+}
+
+::ng-deep .mat-menu-item:focus{
+  outline: none !important;
+}
+
+::ng-deep .mat-menu-item{
+  outline: none !important;
+}

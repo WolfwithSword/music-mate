@@ -1,0 +1,131 @@
+{
+  "name": "music-mate",
+  "version": "0.1.0",
+  "author": "WolfwithSword",
+  "description": "Local Music Player with data output files for OBS Text Display",
+  "main": "main.js",
+  "scripts": {
+    "ng": "ng",
+    "start": "electron-forge start",
+    "build": "ng build --base-href ./",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e",
+    "start:build": "ng build --base-href ./ && electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "make:prod": "ng build --base-href ./ --prod && electron-forge make"
+  },
+  "private": true,
+  "dependencies": {
+    "@angular/animations": "~9.1.9",
+    "@angular/cdk": "^9.2.4",
+    "@angular/common": "~9.1.9",
+    "@angular/compiler": "~9.1.9",
+    "@angular/core": "~9.1.9",
+    "@angular/forms": "~9.1.9",
+    "@angular/material": "^9.2.4",
+    "@angular/platform-browser": "~9.1.9",
+    "@angular/platform-browser-dynamic": "~9.1.9",
+    "@angular/router": "~9.1.9",
+    "bootstrap": "^4.5.0",
+    "electron-json-storage": "^4.1.8",
+    "electron-squirrel-startup": "^1.0.0",
+    "get-audio-duration": "^2.0.2",
+    "hazardous": "^0.3.0",
+    "jquery": "^3.5.1",
+    "moment": "^2.26.0",
+    "musicmetadata": "^2.0.5",
+    "popper.js": "^1.16.1",
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.10.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.901.7",
+    "@angular/cli": "~9.1.7",
+    "@angular/compiler-cli": "~9.1.9",
+    "@electron-forge/cli": "^6.0.0-beta.51",
+    "@electron-forge/maker-deb": "^6.0.0-beta.51",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.51",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.51",
+    "@electron-forge/maker-zip": "^6.0.0-beta.51",
+    "@electron-forge/maker-wix": "^6.0.0-beta.51",
+    "@types/jasmine": "~3.5.0",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.12.45",
+    "codelyzer": "^5.1.2",
+    "electron": "^9.0.3",
+    "electron-rebuild": "^1.11.0",
+    "jasmine-core": "~3.5.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~5.0.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~2.1.0",
+    "karma-jasmine": "~3.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "protractor": "~7.0.0",
+    "ts-node": "~8.3.0",
+    "tslint": "~6.1.0",
+    "typescript": "~3.8.3"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "asar": {
+          "unpack": "node_modules/@ffprobe-installer",
+          "unpackDir": "node_modules/@ffprobe-installer"
+        },
+        "appVersion": "0.1.0",
+        "executableName": "Music Mate",
+        "name": "Music Mate",
+        "overwrite": true,
+        "icon": "src/assets/musicmate_logo_solid_1.ico"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "authors": "WolfwithSword",
+            "exe": "Music Mate.exe",
+            "icon": "src/assets/musicmate_logo.ico",
+            "name": "music_mate",
+            "loadingGif": "src/assets/256_loading.gif",
+            "noMsi": true,
+            "setupExe": "MusicMateSetupv0.1.0.exe",
+            "setupIcon": "src/assets/musicmate_logo.ico",
+            "title": "Music Mate",
+            "version": "0.1.0"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-wix",
+          "config": {
+            "name": "Music Mate",
+            "exe": "Music Mate",
+            "version": "0.1.0",
+            "shortName": "musicmate",
+            "shortcutFolderName": "Music Mate",
+            "ui": {
+              "chooseDirectory": true
+            }
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
