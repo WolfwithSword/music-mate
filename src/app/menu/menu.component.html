@@ -1,7 +1,8 @@
 <mat-toolbar class="header titlebar mat-elevation-z5">
     <div class="row mt-2 ml-2">
-        <span class="titlebar-name"><img class="titlebar-logo" src="assets/musicmate_logo.png" width="24px" height="24px">Music Mate</span>
-        <div class="titlebar-buttons">
+        <span class="titlebar-name no-select" matTooltip="Created by: WolfwithSword"><img class="titlebar-logo" src="assets/musicmate_logo.png" width="24px" height="24px">Music Mate</span>
+		<div class="titlebar-buttons">
+			<a href="https://github.com/WolfwithSword/music-mate/blob/master/README.md" target="_blank" class="titlebar-help-link" matTooltip="Open Help" mat-icon-button><mat-icon inline=true color="accent" >help_outline</mat-icon></a>
             <button class="titlebar-button" mat-icon-button (click)="minimizeApp()"><mat-icon inline=true color="accent" >minimize</mat-icon></button>
             <button class="titlebar-button" mat-icon-button  (click)="maximizeApp()"><mat-icon inline=true color="accent">{{!getIsMaximized() ? 'crop_3_2' : 'filter_none' }}</mat-icon></button>
             <button class="titlebar-button" mat-icon-button (click)="closeApp()" ><mat-icon inline=true color="accent">close</mat-icon></button>
@@ -13,7 +14,7 @@
     <mat-icon inline=true color="accent" class="no-select tbpl-icon">playlist_play</mat-icon>
     <mat-form-field *ngIf="allPlaylists != []" class="choose-pl">
         <!--<mat-label>Playlist</mat-label>-->
-        <mat-select [(ngModel)]="currentPlaylist"
+        <mat-select matTooltip="Select Playlist" [(ngModel)]="currentPlaylist"
                     [compareWith]="comparePLByName"
                     (ngModelChange)="changePlaylist($event)"
                     name="playlist">
@@ -40,9 +41,9 @@
             <div class="row menu-content" >
                 <div class="col float-right" style="position: fixed">
                     <div class="menu-buttons float-right">
-                        <button mat-raised-button class="tbb-icon" (click)="openAddSongModal()" ><mat-icon inline=true class="tbb-iconsizer" color="accent">playlist_add</mat-icon> Add Song</button>
-                        <button mat-raised-button class="tbb-icon" (click)="createPlaylist()"><mat-icon inline=true color="accent" class="tbb-iconsizer" >add</mat-icon> New Playlist</button>
-                        <button mat-icon-button class="menu-icon" (click)="openMenu()"><mat-icon inline=true color="accent" class="hamburger tbb-iconsizer">menu</mat-icon></button>
+                        <button mat-raised-button class="tbb-icon" matTooltip="Add A New Song" (click)="openAddSongModal()" ><mat-icon inline=true class="tbb-iconsizer" color="accent">playlist_add</mat-icon> Add Song</button>
+                        <button mat-raised-button class="tbb-icon" matTooltip="Creat A New Playlist" (click)="createPlaylist()"><mat-icon inline=true color="accent" class="tbb-iconsizer" >add</mat-icon> New Playlist</button>
+                        <button mat-icon-button class="menu-icon" matTooltip="Metadata Settings" (click)="openMenu()"><mat-icon inline=true color="accent" class="hamburger tbb-iconsizer">menu</mat-icon></button>
                     </div>
                 </div>
             </div>

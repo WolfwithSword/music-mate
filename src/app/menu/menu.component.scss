@@ -43,13 +43,25 @@ button.mat-icon-button .mat-icon {
 .titlebar-button {
     outline: none !important;
     -webkit-app-region: no-drag;
-    margin-right: 10%;
+    margin-right: 5%;
+	top: -2px;
 }
 
 .titlebar-buttons {
-    right: 25px;
-    top: -4px;
+    right: 20px;
+    top: -6px;
     position: fixed;
+}
+
+.titlebar-help-link{
+    font-size: 1.3em;
+	outline: none !important;
+	-webkit-app-region: no-drag;
+	margin-right: 8px;
+}
+
+.titlebar-help-link:focus{
+	outline: none !important;
 }
 
 .titlebar-name {
@@ -61,6 +73,7 @@ button.mat-icon-button .mat-icon {
 .titlebar-logo {
     margin-right: 8px;
     magin-bottom: 4px;
+	-webkit-app-region: no-drag;
 }
 
 .menu-content {

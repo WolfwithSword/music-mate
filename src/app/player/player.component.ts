@@ -7,13 +7,22 @@ import { BehaviorSubject, Subject, Subscription, fromEvent } from 'rxjs';
 import { take, filter } from "rxjs/operators";
 import { Song } from '../models/song';
 import { Playlist } from '../models/playlist';
+import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/material/tooltip';
 const electron = (<any>window).require('electron');
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss'],
-  //changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-player',
+    templateUrl: './player.component.html',
+    styleUrls: ['./player.component.scss'],
+    providers: [
+        {	
+		    provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {
+			    showDelay: 1000,
+	    		hideDelay: 500,
+		    	touchendHideDelay: 500,
+		    }
+	    }
+    ],
 })
 
 export class PlayerComponent implements OnInit {

@@ -166,6 +166,11 @@ init();
 ipcMain.on("init", async(event) => {
     init();
     //console.log(storage.getDataPath());
+	
+    mainWindow.webContents.on("new-window", async(event, url) => {
+        event.preventDefault();
+        require('electron').shell.openExternal(url);
+    });
 })
 
 ipcMain.on("get-settings", async(event) => {

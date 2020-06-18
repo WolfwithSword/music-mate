@@ -24,22 +24,22 @@
 
                 <div class="col">
                     <div class="row">
-                        <button mat-icon-button class="media_icons"><mat-icon inline=true class="media_icon" color="accent" (click)="toggleVolume()">
+                        <button mat-icon-button matTooltip="Toggle Mute" class="media_icons" (click)="toggleVolume()"><mat-icon inline=true class="media_icon" color="accent">
                             {{getVolumeIcon()}}
                             </mat-icon></button>
-                        <mat-slider #volSlider [(ngModel)]="songVolume" (input)="songVolume=$event.value;" (click)="isTMuted=false" step="1" min="0" max="100"></mat-slider>
+                        <mat-slider #volSlider thumbLabel [(ngModel)]="songVolume" (input)="songVolume=$event.value;" (click)="isTMuted=false" step="1" min="0" max="100"></mat-slider>
                     </div>
                 </div>
 
                 <div class="col center-block text-center d-flex justify-content-center">
-                    <button mat-icon-button class="media_icons playable"><mat-icon inline=true class="media_icon" color="accent" (click)="playPreviousSong()">skip_previous</mat-icon></button>
-                    <button mat-icon-button class="media_icons playable"><mat-icon inline=true class="media_icon" color="accent" (click)="isPlaying ? player.pause() : player.play()">{{isPlaying ? 'pause' : 'play_arrow'}}</mat-icon></button>
-                    <button mat-icon-button class="media_icons playable"><mat-icon inline=true class="media_icon" color="accent" (click)="playNextSong()">skip_next</mat-icon></button>
+                    <button mat-icon-button class="media_icons playable" matTooltip="Play Previous" (click)="playPreviousSong()"><mat-icon inline=true class="media_icon" color="accent">skip_previous</mat-icon></button>
+                    <button mat-icon-button class="media_icons playable" [matTooltip]="isPlaying? 'Pause' : 'Play'" (click)="isPlaying ? player.pause() : player.play()"><mat-icon inline=true class="media_icon" color="accent">{{isPlaying ? 'pause' : 'play_arrow'}}</mat-icon></button>
+                    <button mat-icon-button class="media_icons playable" matTooltip="Play Next" (click)="playNextSong()"><mat-icon inline=true class="media_icon" color="accent">skip_next</mat-icon></button>
                 </div>
 
                 <div class="col media_actions float-right text-right">
-                    <button mat-icon-button class="media_icons media_action"><mat-icon inline=true class="media_icon" [color]="toggleLoop ? 'warn' : 'accent'" (click)="toggleLoop = !toggleLoop">loop</mat-icon></button>
-                    <button mat-icon-button class="media_icons media_action"><mat-icon inline=true class="media_icon" color="accent" (click)="shuffleSongs()">shuffle</mat-icon></button>
+                    <button mat-icon-button class="media_icons media_action" matTooltip="Toggle Loop" (click)="toggleLoop = !toggleLoop"><mat-icon inline=true class="media_icon" [color]="toggleLoop ? 'warn' : 'accent'">loop</mat-icon></button>
+                    <button mat-icon-button class="media_icons media_action" matTooltip="Shuffle" (click)="shuffleSongs()"><mat-icon inline=true class="media_icon" color="accent">shuffle</mat-icon></button>
                 </div>
 
             </div>

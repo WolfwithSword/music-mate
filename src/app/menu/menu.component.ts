@@ -12,13 +12,23 @@ import { MatDialog } from '@angular/material/dialog';
 import { SongmodalComponent } from '../songmodal/songmodal.component';
 import { PlaylistmodalComponent } from '../playlistmodal/playlistmodal.component';
 import { MenumodalComponent } from '../menumodal/menumodal.component';
+import {MAT_TOOLTIP_DEFAULT_OPTIONS, MatTooltipDefaultOptions} from '@angular/material/tooltip';
 const electron = (<any>window).require('electron');
 const { remote } = (<any>window).require('electron');
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss'],
+    selector: 'app-menu',
+    templateUrl: './menu.component.html',
+    styleUrls: ['./menu.component.scss'],
+    providers: [
+        {	
+		    provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {
+			    showDelay: 1000,
+	    		hideDelay: 500,
+		    	touchendHideDelay: 500,
+		    }
+	    }
+    ],
 })
 export class MenuComponent implements OnInit {
 
