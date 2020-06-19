@@ -122,6 +122,8 @@ If you know what you're doing, you can go ham with any other filters. In the fut
 	- Track Seeking
 	- Keyboard/Hotkey/Media Button interaction
 	- Auto Update
+	- Translation Ready UI Elements
+	- Store version number in UI app somewhere (and automate in build process)
 	
 - Other
 	- Actually spend effort to make the design look nice. Logo too.
