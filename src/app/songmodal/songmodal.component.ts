@@ -36,11 +36,11 @@ export class SongmodalComponent implements OnInit {
                 electron.ipcRenderer.send("get-duration", file);
                 if (metadata) {
                     if (metadata.hasOwnProperty('title') && metadata.title != null
-                        && metadata.title != "" && this.song.title == "") {
+                        && metadata.title != "") {
                         this.song.title = metadata.title;
                     }
                     if(metadata.hasOwnProperty('artist') && metadata.artist != null
-                        && metadata.artist != [] && this.song.artist != "") {
+                        && metadata.artist != []) {
                         this.song.artist = metadata.artist[0];
                     }
                     else if (metadata.hasOwnProperty("albumartist") && metadata.albumartist != null
