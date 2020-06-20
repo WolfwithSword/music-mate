@@ -17,8 +17,7 @@
                     </div>
                 </div>
             </div>
-            <mat-progress-bar color="accent" mode="determinate" [(value)]="progressVal" name="songProgress" ngDefaultControl>
-            </mat-progress-bar>
+			<mat-slider class="seekBar" color="accent" #seekSlider min="0" [max]="player?.duration" step="1" (input)="player.currentTime=$event.value;" [value]="player?.currentTime"></mat-slider>
             <br>
             <div class="row ml-1">
 
