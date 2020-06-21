@@ -92,6 +92,7 @@ import { MatTableModule } from '@angular/material/table';
        // MatDatepickerModule,
         //MatChipsModule,
         MatTooltipModule,
+        MatCheckboxModule,
         MatTableModule,
         //MatPaginatorModule,
         MatProgressBarModule 

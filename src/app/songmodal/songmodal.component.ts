@@ -12,6 +12,9 @@ import { Playlist } from '../models/playlist';
 })
 export class SongmodalComponent implements OnInit {
 
+    states:string[] = ["AddNewSong","AddSongs", "DeleteSongs"];
+    state:number = 0;
+    deleteMissing:boolean = false;
     selectedSong: string = "";
     currentPlaylist: Playlist;
     currentPlaylistName: string;
@@ -19,6 +22,13 @@ export class SongmodalComponent implements OnInit {
     song: Song = new Song();
     fileChosen: boolean;
     allSongNames: string[] = [];
+
+    filteredSongsList: Song[] = [];
+    filterSongArtist: string = "";
+    filterSongTitle: string = "";
+
+    songs: Song[] = [];
+    selectedSongs: Song[] = [];
 
     constructor(public dialogRef: MatDialogRef<SongmodalComponent>,private cdr: ChangeDetectorRef) {
         this.song.title = "";
@@ -67,16 +77,89 @@ export class SongmodalComponent implements OnInit {
             if (this.allPlaylists.length >= 1) {
                 this.changePlaylist(this.allPlaylists[0]);
             }
+
             this.cdr.detectChanges();
         });
-
-        electron.ipcRenderer.send("get-playlists");
-        electron.ipcRenderer.send("get-current-playlist-name");
+        electron.ipcRenderer.on("send-all-songs", async(event, songs) => {
+                this.songs = songs;
+                this.filteredSongsList = this.songs;
+                this.filterSongs();
+        });
     }
 
     ngOnInit(): void {
         this.dialogRef.updatePosition({ top: '30px'});
         this.cdr.detectChanges();
+
+        electron.ipcRenderer.send("get-playlists");
+        electron.ipcRenderer.send("get-current-playlist-name");
+    }
+
+    switchStates() {
+        this.songs = [];
+        this.filteredSongsList = [];
+        this.selectedSongs = [];
+        this.filterSongArtist = "";
+        this.filterSongTitle = "";
+        if (this.state == 0) {
+            electron.ipcRenderer.send("get-playlists");
+            electron.ipcRenderer.send("get-current-playlist-name");
+        }
+        else if (this.state == 1) {
+            electron.ipcRenderer.send("get-playlists");
+            electron.ipcRenderer.send("get-current-playlist-name");
+            electron.ipcRenderer.send("get-all-songs");
+        }
+        else if (this.state == 2) {
+            electron.ipcRenderer.send("get-all-songs");
+        }
+    }
+
+    checkContains(songList, song) {
+        for (var i = 0; i < songList.length; i++) {
+            let s = songList[i];
+            if(song.title == s.title && song.path == s.path && song.artist == s.artist) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    toggleInSongList(song) {
+        if(this.checkContains(this.currentPlaylist.songs, song)) {
+            this.currentPlaylist.songs = this.currentPlaylist.songs.filter( (s) => {
+                if(song.title == s.title && song.path == s.path && song.artist == s.artist) {
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            });
+        }
+        else {
+            this.currentPlaylist.songs.push(song);
+        }
+        console.log(song);
+        console.log(this.currentPlaylist);
+    }
+
+    filterSongs() {
+        this.filteredSongsList = [];
+        if(this.songs == null) { return;}
+        this.filteredSongsList = this.songs.filter( (elem, index, array) => {
+            let filterByTitle = this.filterSongTitle == "" ? false : true;
+            let filterByArtist = this.filterSongArtist == "" ? false : true;
+
+            let add = true;
+
+            if (add && filterByTitle) {
+                add = elem.title.trim().toLowerCase().includes(this.filterSongTitle.trim().toLowerCase());
+            }
+            if (add && filterByArtist) {
+                add = elem.artist.trim().toLowerCase().includes(this.filterSongArtist.trim().toLowerCase());
+            }
+            return add;
+        });
     }
 
     openFileDialog() {
@@ -95,9 +178,11 @@ export class SongmodalComponent implements OnInit {
     }
 
     isNotCompleted() {
-        return (!this.fileChosen || this.song.title == null
-            || this.song.title == "" || this.song.path == null ||
-            this.song.path == "" || this.allSongNames.includes(this.song.title.trim()));
+        if (this.states[this.state] == 'AddNewSong'){
+            return (!this.fileChosen || this.song.title == null
+                || this.song.title == "" || this.song.path == null ||
+                this.song.path == "" || this.allSongNames.includes(this.song.title.trim()));
+        }
     }
 
     addSong() {
@@ -109,4 +194,14 @@ export class SongmodalComponent implements OnInit {
         electron.ipcRenderer.send("add-to-playlist", this.song, this.currentPlaylist.name);
         electron.ipcRenderer.send("add-new-song", this.song);
     }
+
+     setSongs() {
+         electron.ipcRenderer.send("overwrite-playlist", this.currentPlaylist);
+    }
+
+    deleteSongs() {
+        electron.ipcRenderer.send("delete-songs", this.selectedSongs, this.deleteMissing);
+    }
+
+
 }

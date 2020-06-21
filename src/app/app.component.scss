@@ -17,23 +17,23 @@
 }
 
 ::ng-deep mat-slider.seekBar > div.mat-slider-wrapper > div.mat-slider-track-wrapper {
-	border-radius: 8px !important;
-	height: 9px !important;
+    border-radius: 8px !important;
+    height: 9px !important;
 }
 
 ::ng-deep mat-slider.seekBar > div.mat-slider-wrapper > div.mat-slider-thumb-container > .mat-slider-thumb {
-	transform: scale(1.2)!important;
-	bottom: -13px!important;
+    transform: scale(1.2)!important;
+    bottom: -13px!important;
 }
 
 ::ng-deep mat-slider.seekBar > div.mat-slider-wrapper > div.mat-slider-track-wrapper > .mat-slider-track-background {
-	background-color: #b0bec5 !important;
-	height: 100%!important;
+    background-color: #b0bec5 !important;
+    height: 100%!important;
 }
 
 ::ng-deep mat-slider.seekBar > div.mat-slider-wrapper > div.mat-slider-track-wrapper > .mat-slider-track-fill {
     background-color: map-get(styles.$app-accent-blue, A200) !important;
-	height: 100%!important;
+    height: 100%!important;
 }
 
 ::ng-deep .mat-slider-min-value:not(.mat-slider-thumb-label-showing) .mat-slider-thumb {
@@ -118,4 +118,20 @@
 
 ::ng-deep .mat-menu-item{
   outline: none !important;
+}
+
+::ng-deep .mat-radio-checked .mat-radio-inner-circle{
+    background-color: white!important;
+}
+
+::ng-deep .mat-radio-button {
+    margin-left: 15px!important;
+}
+
+::ng-deep .mat-pseudo-checkbox{
+    background-color: white;
+}
+
+::ng-deep .mat-checkbox-background {
+    background-color:white;
 }

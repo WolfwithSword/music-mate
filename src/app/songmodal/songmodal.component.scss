@@ -9,11 +9,27 @@
 }
 
 .input-form {
-  min-width: 150px;
-  max-width: 500px;
-  width: 100%;
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
 }
 
 .input-width {
-  width: 100%;
+    width: 100%;
+}
+
+.mat-list-option, .mat-list-item-content, .mat-list-item-ripple{
+  min-height: 48px!important;
+  height: auto!important;
+  box-shadow: 0 0 4pt rgba(0, 0, 0, 0.25)!important;
+}
+
+.mat-list-text {
+    margin-top: auto!important;
+    margin-bottom: auto!important;
+    vertical-align:middle !important;
+}
+
+.mat-selection-list {
+    box-shadow: 0 0 12pt rgba(0, 0, 0, 0.25)!important;
 }

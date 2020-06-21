@@ -1,6 +1,6 @@
 {
   "name": "music-mate",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "author": "WolfwithSword",
   "description": "Local Music Player with data output files for OBS Text Display",
   "main": "main.js",
@@ -76,7 +76,7 @@
           "unpack": "node_modules/@ffprobe-installer",
           "unpackDir": "node_modules/@ffprobe-installer"
         },
-        "appVersion": "0.1.0",
+        "appVersion": "1.0.0",
         "executableName": "Music Mate",
         "name": "Music Mate",
         "overwrite": true,
@@ -92,10 +92,10 @@
             "name": "music_mate",
             "loadingGif": "src/assets/256_loading.gif",
             "noMsi": true,
-            "setupExe": "MusicMateSetupv0.1.0.exe",
+            "setupExe": "MusicMateSetupv1.0.0.exe",
             "setupIcon": "src/assets/musicmate_logo.ico",
             "title": "Music Mate",
-            "version": "0.1.0"
+            "version": "1.0.0"
           }
         },
         {
@@ -103,7 +103,7 @@
           "config": {
             "name": "Music Mate",
             "exe": "Music Mate",
-            "version": "0.1.0",
+            "version": "1.0.0",
             "shortName": "musicmate",
             "shortcutFolderName": "Music Mate",
             "ui": {

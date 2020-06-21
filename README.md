@@ -1,4 +1,5 @@
 
+
 # Music Mate
 <img src="https://imgur.com/xq3fT9c.png" height="250" width="250">
 
@@ -11,7 +12,7 @@ Why store this information? Well, I don't know about you but I'm too broke for S
 
 And why not just use a standard song queue system like media request in StreamElements and limit it to playlists you made, for example? Yeah you can do that. I just wanted something local :)
 
-<img src="https://imgur.com/NxyxjWH.png" width="600" height="520">
+<img src="https://imgur.com/1tCjP21.png" width="600" height="520">
 **Note:** I am not the world's best designer, it'll be worked on I promise
 
 # IMPORTANT
@@ -27,8 +28,16 @@ If the file has metadata for its title and artist, it will be automatically fill
 
 If the file or title is missing, or a song with the same title already exists in the playlist you are trying to add it to, you will be unable to add it. Select the file and use and modify the title.
 
-<img src="https://imgur.com/9fzkiGn.png" width="600" height="520"> <img src="https://imgur.com/oHYfvkl.png" width="600" height="520">
+<img src="https://imgur.com/blwHL0v.png" width="600" height="520"> <img src="https://imgur.com/xE3MTAz.png" width="600" height="520">
 
+In the **Manage Existing Songs** tab, you can change up the songs in a given playlist from ones already added to the app.
+
+ <img src="https://imgur.com/tr6iBsq.png" width="600" height="520">
+ 
+In the **Delete Song Records** tab, you can permanently delete songs from the app. This will cascade into all playlists as well.
+
+ <img src="https://imgur.com/aYXA6zr.png" width="600" height="520">
+ 
 ### Creating New Playlist & Switching Playlists
 Click the **New Playlist** button to open the dialog for creating a new playlist.
 
@@ -112,18 +121,16 @@ If you know what you're doing, you can go ham with any other filters. In the fut
 
 ## TODO Plan & Long-Term Goals
 - Features
-	- Add HELP menu button
 	- Add Themes
 	- Add Import Directory As Playlist
 	- Add more user settings, such as retain last played playlist and volume level
 	- Crossfading capability
 	- HTML File output (For advanced usage in OBS with custom CSS)
-	- Allow deleting from the master song list (not to be confused with the Default playlist)
-	- Track Seeking
 	- Keyboard/Hotkey/Media Button interaction
 	- Auto Update
 	- Translation Ready UI Elements
 	- Store version number in UI app somewhere (and automate in build process)
+	- Setting to toggle on/off hardware accelaration
 	
 - Other
 	- Actually spend effort to make the design look nice. Logo too.

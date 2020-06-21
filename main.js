@@ -178,9 +178,11 @@ ipcMain.on("get-settings", async(event) => {
 })
 
 ipcMain.on("update-settings", async(event, settings) => {
-	global_settings = settings;
-
-	storage.set("settings", settings, async (err)=> {
+	let keys = Object.keys(settings);
+	for(var i = 0; i < keys.length; i++) {
+		global_settings[keys[i]] = settings[keys[i]];
+	}
+	storage.set("settings", global_settings, async (err)=> {
         if (err)
             throw err;
 	});
@@ -395,6 +397,58 @@ ipcMain.on('add-to-playlist', async(event, newSong, playlistName) => {
 
         mainWindow.webContents.send("update-songs", newSong, playlistName);
     })
+});
+
+ipcMain.on("delete-songs", async(event, songs, deleteMissingPaths) => {
+	storage.get("songs", function(error, data) {
+		if(error) throw error;
+		for (var i = 0; i< songs.length; i++) {
+			let key = songs[i].path + "|" + songs[i].title + "|" + songs[i].artist;
+			delete data[key];
+		}
+		let keys = Object.keys(data);
+		if (deleteMissingPaths) {
+			for (var i = 0; i<keys.length; i++){
+				if(!fs.existsSync(data[keys[i]].path)) {
+					delete data[keys[i]];
+				}
+			}
+		}
+		let array = [];
+        for (var i of Object.keys(data)) {
+			if(fs.existsSync(data[i].path)) {
+				array.push(data[i]);
+			}
+        }
+		storage.set("songs", data, function(error) {
+			if (error) throw error;
+		});
+		allValidSongs = array;
+		
+		storage.get("playlists", function(err, data2) {
+			for(var name of Object.keys(data2)) {
+				for(var song of data2[name].songs) {
+					let key = song.path+"|"+song.title+"|"+song.artist;
+					if(!data.hasOwnProperty(key)) {
+						removeSongFromPlaylist(song, name);
+					}
+				}
+			}
+		});
+		mainWindow.webContents.send("send-all-songs");
+		mainWindow.webContents.send("update-songs",null, currentPlaylist);
+	})
+});
+
+ipcMain.on("overwrite-playlist", async(event, playlist) => {
+	storage.get("playlists", function(error, data) {
+		data[playlist.name] = playlist;
+		storage.set("playlists", data, function(error) {
+			if (error) throw error;
+		});
+		mainWindow.webContents.send("send-all-songs");
+		mainWindow.webContents.send("update-songs",null, currentPlaylist);
+	});
 });
 
 function removeSongFromPlaylist(song, playlistName) {

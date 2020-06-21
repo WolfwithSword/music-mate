@@ -15,13 +15,13 @@ const electron = (<any>window).require('electron');
     templateUrl: './player.component.html',
     styleUrls: ['./player.component.scss'],
     providers: [
-        {	
-		    provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {
-			    showDelay: 1000,
-	    		hideDelay: 500,
-		    	touchendHideDelay: 500,
-		    }
-	    }
+        {
+            provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {
+                showDelay: 1000,
+                hideDelay: 500,
+                touchendHideDelay: 500,
+            }
+        }
     ],
 })
 
@@ -57,7 +57,7 @@ export class PlayerComponent implements OnInit {
             this.isPlaying = false;
             this.playlist = playlist;
 
-        electron.ipcRenderer.send("change-playlist-update", this.playlist.name);
+            electron.ipcRenderer.send("change-playlist-update", this.playlist.name);
             if (this.playlist.songs.length > 0) {
                 this.player.nativeElement.src = this.playlist.songs[0].path;
                 this.player.nativeElement.load();
@@ -71,6 +71,10 @@ export class PlayerComponent implements OnInit {
         });
 
         electron.ipcRenderer.on('update-songs', async(event, newSong, playlistName) => {
+            if(playlistName == this.playlist.name && newSong == null) {
+                electron.ipcRenderer.send("get-playlist", playlistName);
+                return;
+            }
             if(this.activeSong == [] || this.activeSong == null || this.playlist.songs.length == 0) {
                 this.durationTime = undefined;
                 this.player.nativeElement.src = newSong.path;

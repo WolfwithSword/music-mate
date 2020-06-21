@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {OverlayContainer, OverlayModule} from '@angular/cdk/overlay';
 
 import { AppComponent } from './app.component';
@@ -33,6 +33,7 @@ import { MenumodalComponent } from './menumodal/menumodal.component';
         AppRoutingModule,
         MaterialModule,
         FormsModule,
+        ReactiveFormsModule,
         OverlayModule,
         ClipboardModule
     ],

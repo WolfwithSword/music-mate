@@ -21,13 +21,13 @@ const { remote } = (<any>window).require('electron');
     templateUrl: './menu.component.html',
     styleUrls: ['./menu.component.scss'],
     providers: [
-        {	
-		    provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {
-			    showDelay: 1000,
-	    		hideDelay: 500,
-		    	touchendHideDelay: 500,
-		    }
-	    }
+        {
+            provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: {
+                showDelay: 1000,
+                hideDelay: 500,
+                touchendHideDelay: 500,
+            }
+        }
     ],
 })
 export class MenuComponent implements OnInit {
