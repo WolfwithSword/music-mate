@@ -93,27 +93,42 @@ export class PlayerComponent implements OnInit {
         electron.ipcRenderer.on("play-prev", async(event) => {
             this.playPreviousSong();
         });
-        electron.ipcRenderer.on("pause", async(event) => {
+        electron.ipcRenderer.on("pause", async(event, uuid) => {
             this.player.nativeElement.pause();
+			electron.ipcRenderer.send("send-play-status", false, uuid);
         });
-        electron.ipcRenderer.on("play", async(event) => {
+        electron.ipcRenderer.on("play", async(event, uuid) => {
             this.player.nativeElement.play();
+			electron.ipcRenderer.send("send-play-status", true, uuid);
         });
-        electron.ipcRenderer.on("toggle-pause", async(event) => {
+		electron.ipcRenderer.on("get-play-status", async(event, uuid) => {
+			electron.ipcRenderer.send("send-play-status", this.isPlaying, uuid);
+        });
+        electron.ipcRenderer.on("toggle-pause", async(event, uuid) => {
             if (this.isPlaying) {
                 this.player.nativeElement.pause();
+				electron.ipcRenderer.send("send-play-status", false, uuid);
             }
             else {
                 this.player.nativeElement.play();
+				electron.ipcRenderer.send("send-play-status", true, uuid);
             }
         });
-        electron.ipcRenderer.on("toggle-loop", async(event) => {
+        electron.ipcRenderer.on("toggle-loop", async(event, uuid) => {
             this.toggleLoop = !this.toggleLoop;
+			electron.ipcRenderer.send("send-loop-status", this.toggleLoop, uuid);
         });
-        electron.ipcRenderer.on("toggle-mute", async(event) => {
+		electron.ipcRenderer.on("get-loop-status", async(event, uuid) => {
+			electron.ipcRenderer.send("send-loop-status", this.toggleLoop, uuid);
+        });
+		electron.ipcRenderer.on("get-volume-level", async(event, uuid) => {
+			electron.ipcRenderer.send("send-volume-level", this.songVolume, uuid);
+		});
+        electron.ipcRenderer.on("toggle-mute", async(event, uuid) => {
             this.toggleVolume();
+			electron.ipcRenderer.send("send-volume-level", this.songVolume, uuid);
         });
-        electron.ipcRenderer.on("set-volume", async(event, value) => {
+        electron.ipcRenderer.on("set-volume", async(event, value, uuid) => {
             if(value < 0) {
                 value = 0;
             }
@@ -121,8 +136,9 @@ export class PlayerComponent implements OnInit {
                 value = 100;
             }
             this.songVolume = value;
+			electron.ipcRenderer.send("send-volume-level", this.songVolume, uuid);
         });
-        electron.ipcRenderer.on("modify-volume", async(event, value) => {
+        electron.ipcRenderer.on("modify-volume", async(event, value, uuid) => {
             value = this.songVolume + value;
             if(value < 0) {
                 value = 0;
@@ -131,10 +147,24 @@ export class PlayerComponent implements OnInit {
                 value = 100;
             }
             this.songVolume = value;
+			electron.ipcRenderer.send("send-volume-level", this.songVolume, uuid);
         });
         electron.ipcRenderer.on("shuffle", async(event) => {
             this.shuffleSongs();
         });
+		
+		electron.ipcRenderer.on("get-song-status-name", async(event, uuid) => {
+			electron.ipcRenderer.send("send-song-status-name", this.activeSong[0].title, uuid);
+		});
+		electron.ipcRenderer.on("get-song-status-artist", async(event, uuid) => {
+			electron.ipcRenderer.send("send-song-status-artist", this.activeSong[0].artist, uuid);
+		});
+		electron.ipcRenderer.on("get-song-status-duration", async(event, uuid) => {
+			electron.ipcRenderer.send("send-song-status-duration", this.activeSong[0].duration, uuid);
+		});
+		electron.ipcRenderer.on("get-song-status", async(event, uuid) => {
+			electron.ipcRenderer.send("send-song-status", this.activeSong[0], uuid);
+		});
     }
 
     public onEnded(event) {
