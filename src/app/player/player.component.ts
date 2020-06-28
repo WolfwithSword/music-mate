@@ -29,6 +29,7 @@ export class PlayerComponent implements OnInit {
 
     currentProgress$ = new BehaviorSubject(0);
     currentTime$ = new Subject();
+    lastTime: string;
     progressVal: number = 0;
 
     songVolume: number = 50;
@@ -278,7 +279,14 @@ export class PlayerComponent implements OnInit {
 
         const currentMinutes = this.generateMinutes(this.player.nativeElement.currentTime);
         const currentSeconds = this.generateSeconds(this.player.nativeElement.currentTime);
-        this.currentTime$.next(this.generateTimeToDisplay(currentMinutes, currentSeconds));
+
+        let time = this.generateTimeToDisplay(currentMinutes, currentSeconds);
+        if (this.lastTime != time) {
+            electron.ipcRenderer.send("send-current-duration", time);
+        }
+        this.lastTime = time;
+
+        this.currentTime$.next(time);
 
         let percents = this.generatePercentage(this.player.nativeElement.currentTime, this.player.nativeElement.duration);
         if (percents > 100) {
@@ -289,7 +297,6 @@ export class PlayerComponent implements OnInit {
           this.currentProgress$.next(percents);
         }
         this.cdr.detectChanges();
-        electron.ipcRenderer.send("send-current-duration", this.generateTimeToDisplay(currentMinutes, currentSeconds));
     }
 
 
