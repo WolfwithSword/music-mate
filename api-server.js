@@ -13,13 +13,13 @@ module.exports = function(api, ipcMain, mainWindow){
     function callIPC(req, res, call) {
         let uuid = makeUUID();
         responses[uuid] = res;
-        mainWindow.webContents.send(call, uuid)
+        mainWindow.webContents.send(call, uuid);
     }
 
     function callIPCValue(req, res, call, value) {
         let uuid = makeUUID();
         responses[uuid] = res;
-        mainWindow.webContents.send(call, value, uuid)
+        mainWindow.webContents.send(call, value, uuid);
     }
 
     function togglePlay(req, res) {

@@ -14,7 +14,9 @@
     "start:build": "ng build --base-href ./ && electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "make:prod": "ng build --base-href ./ --prod && electron-forge make"
+    "make:tpp": "cd touchportal && build.bat",
+    "make:prod": "ng build --base-href ./ --prod && electron-forge make",
+    "make:prod:all": "ng build --base-href ./ --prod && electron-forge make && cd touchportal && build.bat"
   },
   "private": true,
   "dependencies": {
@@ -36,6 +38,7 @@
     "jquery": "^3.5.1",
     "moment": "^2.26.0",
     "musicmetadata": "^2.0.5",
+    "net": "^1.0.2",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",

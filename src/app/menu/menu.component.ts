@@ -49,16 +49,16 @@ export class MenuComponent implements OnInit {
             }
             this.cdr.detectChanges();
         });
-		
-		electron.ipcRenderer.on("swap-to-playlist-name", async(event, name, uuid) => {
-			for( var i = 0; i< this.allPlaylists.length; i++) {
-				if( this.allPlaylists[i].name == name) {
-					this.swapToPlaylist(this.allPlaylists[i]);
-					break;
-				}
-			}
-			electron.ipcRenderer.send("send-playlist-status", this.currentPlaylist, uuid);
-		});
+
+        electron.ipcRenderer.on("swap-to-playlist-name", async(event, name, uuid) => {
+            for( var i = 0; i< this.allPlaylists.length; i++) {
+                if( this.allPlaylists[i].name == name) {
+                    this.swapToPlaylist(this.allPlaylists[i]);
+                    break;
+                }
+            }
+            electron.ipcRenderer.send("send-playlist-status", this.currentPlaylist, uuid);
+        });
 
         electron.ipcRenderer.on("send-playlist", async(event, data) => {
             this.currentPlaylist = data;
@@ -68,14 +68,14 @@ export class MenuComponent implements OnInit {
         electron.ipcRenderer.on("get-current-playlist-name", async(event) => {
             electron.ipcRenderer.send("send-current-playlist-name", this.currentPlaylist.name);
         });
-		
-		electron.ipcRenderer.on("get-playlist-status", async(event, uuid) => {
-			electron.ipcRenderer.send("send-playlist-status", this.currentPlaylist, uuid);
-		});
 
-		electron.ipcRenderer.on("get-playlist-name-status", async(event, uuid) => {
-			electron.ipcRenderer.send("send-playlist-name-status", this.currentPlaylist.name, uuid);
-		});
+        electron.ipcRenderer.on("get-playlist-status", async(event, uuid) => {
+            electron.ipcRenderer.send("send-playlist-status", this.currentPlaylist, uuid);
+        });
+
+        electron.ipcRenderer.on("get-playlist-name-status", async(event, uuid) => {
+            electron.ipcRenderer.send("send-playlist-name-status", this.currentPlaylist.name, uuid);
+        });
 
         electron.ipcRenderer.send("get-playlists");
         electron.ipcRenderer.send("get-playlist", "Default");

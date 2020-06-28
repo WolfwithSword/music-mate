@@ -1,0 +1,251 @@
+{
+  "sdk":2,
+  "version":1,
+  "name":"MusicMate TP Plugin",
+  "id":"music_mate_14585",
+  "configuration" : {
+    "colorDark" : "#992211",
+    "colorLight" : "#0033d3"
+  },
+  "categories": [
+    {
+      "id":"musicmate001",
+      "name":"Music Mate",
+      "imagepath":"%TP_PLUGIN_FOLDER%\\music_mate_14585\\musicmate_tp_logo.png",
+      "actions": [
+        {
+          "id":"mm-toggle-play",
+		  "prefix":"Do the following action:",
+          "name":"Toggle Play/Pause",
+		  "description": "Toggle the Play or Pause state",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-play",
+		  "prefix":"Do the following action:",
+          "name":"Play",
+		  "description": "Play Song",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-pause",
+		  "prefix":"Do the following action:",
+          "name":"Pause",
+		  "description": "Pause Song",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-play-next",
+		  "prefix":"Do the following action:",
+          "name":"Play Next",
+		  "description": "Play the Next Song",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-play-prev",
+		  "prefix":"Do the following action:",
+          "name":"Play Previous",
+		  "description": "Play the Previous Song",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-toggle-loop",
+		  "prefix":"Do the following action:",
+          "name":"Toggle Loop",
+		  "description": "Toggle Looping the Current Song",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-shuffle",
+		  "prefix":"Do the following action:",
+          "name":"Shuffle",
+		  "description": "Shuffle the Current Playlist",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-toggle-mute",
+		  "prefix":"Do the following action:",
+          "name":"Toggle Mute",
+		  "description": "Mute or Unmute",
+          "type":"communicate"
+        },
+		{
+          "id":"mm-increase-volume",
+		  "prefix":"Do the following action:",
+          "name":"Increase Volume",
+		  "description": "Increase the Volume by the specified amount. Valid values are from 0 to 100",
+          "type":"communicate",
+		  "data": [
+			{
+				"id": "amount",
+				"type": "number",
+				"label": "Amount",
+				"default": 10,
+			}
+		  ]
+        },
+		{
+          "id":"mm-decrease-volume",
+		  "prefix":"Do the following action:",
+          "name":"Decrease Volume",
+		  "description": "Decrease the Volume by the specified amount. Valid values are from 0 to 100",
+          "type":"communicate",
+		  "data": [
+			{
+				"id": "amount",
+				"type": "number",
+				"label": "Amount",
+				"default": 10,
+			}
+		  ]
+        },
+		{
+          "id":"mm-set-volume",
+		  "prefix":"Do the following action:",
+          "name":"Set Volume",
+		  "description": "Set the Volume to the specified amount. Valid values are from 0 to 100",
+          "type":"communicate",
+		  "data": [
+			{
+				"id": "volume",
+				"type": "number",
+				"label": "Value",
+				"default": 50,
+			}
+		  ]
+        },
+		{
+          "id":"mm-swap-to-playlist-name",
+		  "prefix":"Do the following action:",
+          "name":"Change Playlist",
+		  "description": "Change the Current Playlist. Nothing will happen if the playlist doesn't exist.",
+          "type":"communicate",
+		  "data": [
+			{
+				"id": "playlistName",
+				"type": "text",
+				"label": "Playlist Name",
+				"default": "Default",
+			}
+		  ]
+        },
+      ],
+      "events": [
+        {
+          "id":"mm-is-playing-event",
+          "name":"When a song starts or stops playing",
+          "format":"When playing status is $val",
+          "type":"communicate",
+          "valueType":"choice",
+		  "valueChoices": [
+			"true",
+			"false"
+		  ],
+          "valueStateId":"mm-is-playing"
+        },
+		{
+          "id":"mm-is-looping-event",
+          "name":"When a song starts or stops looping",
+          "format":"When looping status is $val",
+          "type":"communicate",
+          "valueType":"choice",
+		  "valueChoices": [
+			"true",
+			"false"
+		  ],
+          "valueStateId":"mm-is-looping"
+        },
+		{
+          "id":"mm-volume-muted-event",
+          "name":"When the volume is muted or unmuted",
+          "format":"When the volume is $val",
+          "type":"communicate",
+          "valueType":"choice",
+		  "valueChoices": [
+			"Muted",
+			"Unmuted"
+		  ],
+          "valueStateId":"mm-mute-status"
+        },
+      ],
+      "states": [
+		{
+          "id":"mm-connected",
+          "type":"choice",
+          "desc":"Is TP connected to MM?",
+          "default":"false",
+		  "valueChoices": [
+			"true",
+			"false"
+		  ],
+        },
+        {
+          "id":"mm-is-playing",
+          "type":"choice",
+          "desc":"Is MusicMate playing a song?",
+          "default":"false",
+          "valueChoices": [
+            "true",
+            "false"
+          ],
+        },
+		{
+          "id":"mm-is-looping",
+          "type":"choice",
+          "desc":"Is MusicMate looping a song?",
+          "default":"false",
+          "valueChoices": [
+            "true",
+            "false"
+          ],
+        },
+		{
+          "id":"mm-mute-status",
+          "type":"choice",
+          "desc":"Is the Volume Muted?",
+          "default":"false",
+          "valueChoices": [
+            "true",
+            "false"
+          ],
+        },
+		{
+          "id":"mm-volume-level",
+          "type":"text",
+          "desc":"The current volume level",
+          "default":"50"
+        },
+		{
+          "id":"mm-current-duration",
+          "type":"text",
+          "desc":"The current time progress in the current song",
+          "default":"0:00"
+        },
+		{
+          "id":"mm-playlist-name",
+          "type":"text",
+          "desc":"Current Playlist",
+          "default":"Default"
+        },
+		{
+          "id":"mm-song-name",
+          "type":"text",
+          "desc":"Current Song Name",
+          "default":"None"
+        },
+		{
+          "id":"mm-song-artist",
+          "type":"text",
+          "desc":"Current Song Artist",
+          "default":"None"
+        },
+		{
+          "id":"mm-song-duration",
+          "type":"text",
+          "desc":"Current Song Duration",
+          "default":"0:00"
+        },
+      ]
+    }
+  ]
+}

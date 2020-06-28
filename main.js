@@ -179,6 +179,8 @@ ipcMain.on("init", async(event) => {
         event.preventDefault();
         require('electron').shell.openExternal(url);
     });
+
+    require("./tp")(ipcMain, mainWindow);
 })
 
 ipcMain.on("get-settings", async(event) => {

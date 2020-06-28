@@ -26,7 +26,7 @@
                         <button mat-icon-button matTooltip="Toggle Mute" class="media_icons" (click)="toggleVolume()"><mat-icon inline=true class="media_icon" color="accent">
                             {{getVolumeIcon()}}
                             </mat-icon></button>
-                        <mat-slider #volSlider thumbLabel [(ngModel)]="songVolume" (input)="songVolume=$event.value;" (click)="isTMuted=false" step="1" min="0" max="100"></mat-slider>
+                        <mat-slider #volSlider thumbLabel [(ngModel)]="songVolume" (input)="songVolume=$event.value; sendVolumeValue()" (click)="isTMuted=false" step="1" min="0" max="100"></mat-slider>
                     </div>
                 </div>
 
@@ -37,7 +37,7 @@
                 </div>
 
                 <div class="col media_actions float-right text-right">
-                    <button mat-icon-button class="media_icons media_action" matTooltip="Toggle Loop" (click)="toggleLoop = !toggleLoop"><mat-icon inline=true class="media_icon" [color]="toggleLoop ? 'warn' : 'accent'">loop</mat-icon></button>
+                    <button mat-icon-button class="media_icons media_action" matTooltip="Toggle Loop" (click)="toggleLoop = !toggleLoop; sendLoopValue()"><mat-icon inline=true class="media_icon" [color]="toggleLoop ? 'warn' : 'accent'">loop</mat-icon></button>
                     <button mat-icon-button class="media_icons media_action" matTooltip="Shuffle" (click)="shuffleSongs()"><mat-icon inline=true class="media_icon" color="accent">shuffle</mat-icon></button>
                 </div>
 
