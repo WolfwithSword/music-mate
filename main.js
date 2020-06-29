@@ -171,12 +171,12 @@ ipcMain.on("get-settings", async(event) => {
 });
 
 function enableHTTP() {
-	require("./api-server")(api, ipcMain, mainWindow);
+	require("./api/api-server")(api, ipcMain, mainWindow);
     api.listen(port, () => console.log(`Starting up backend API: Listening at http://localhost:${port}`));
 }
 
 function enableTPIntegration() {
-	require("./tp")(ipcMain, mainWindow);
+	require("./touchportal/tp")(ipcMain, mainWindow);
 }
 
 ipcMain.on("enable-http-backend", async(event) => {

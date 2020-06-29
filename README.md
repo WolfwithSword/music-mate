@@ -1,5 +1,6 @@
 
 
+
 # Music Mate
 <img src="https://imgur.com/xq3fT9c.png" height="250" width="250">
 
@@ -13,7 +14,14 @@ Why store this information? Well, I don't know about you but I'm too broke for S
 And why not just use a standard song queue system like media request in StreamElements and limit it to playlists you made, for example? Yeah you can do that. I just wanted something local :)
 
 <img src="https://imgur.com/1tCjP21.png" width="600" height="520">
+
 **Note:** I am not the world's best designer, it'll be worked on I promise
+
+## Use Cases
+Click on the following sections to jump to their specific README.
+- [OBS](https://github.com/WolfwithSword/music-mate/tree/master/obs)
+- [TouchPortal](https://github.com/WolfwithSword/music-mate/tree/master/touchportal)
+- [HTTP Service](https://github.com/WolfwithSword/music-mate/tree/master/api)
 
 # IMPORTANT
 
@@ -61,7 +69,7 @@ This is a generic audio player, really. Doesn't have all the bells and whistles 
 - Shuffle the playlist with the far-right shuffle icon.
 
 ### Metadata Files
-The primary reason I made this app was to output metadata in real-time so I could display it in say, OBS or hook into it with any other software. While I have yet to do a server backend for HTTP stuff, or make plugins for TouchPortal, or output to HTML Files... [See TODO](#TODO-Plan-&-Long-Term-Goals)
+The primary reason I made this app was to output metadata in real-time so I could display it in say, OBS or hook into it with any other software.
 
 It does output to TXT Files, including one configurable file.
 
@@ -82,68 +90,23 @@ The custom file can use the following variables to create a custom message. Any 
 
 <img src="https://imgur.com/oKTm1pX.png" width="600" height="520">
 
-## Using MetaData Files In OBS
-To use the metadata files, first copy one of them by clicking the copy icon in the metadata settings menu.
-
-- In OBS, add a new source **Text (GDI+)**
-- Set any font you wish.
-- Tick **Read From File** and put in the file URL you copied earlier
-- Set the colour, opacity, gradient settings or other to any you wish.
-- *Custom Text Extents warning*: If you know what you are doing, you may customize this as well. However, in confjunction with the padding and using scrolling text filters, it may look... interesting...
-
-You can edit this information again by right clicking the source and selecting **Properties**,
-
-In the preview window, move the text source anywhere you'd like and size it accordingly.
-
-### Add Custom Filters
-Right click the Text source you created, select **Filters**
-#### Scrolling Text:
-- Add a new filter **Scroll**
-	- Suggested settings:
-		- Horizontal Speed: I like 130, but choose whichever you wish
-		- Vertical Speed: 0, unless you want it to go up/down. If in the **Properties** you chose vertical, then this makes sense.
-		- Limit Width: Checked
-		- Width: 5000
-		- Limit Height: Unchecked (Unless you know what you're doing with vertical stuff)
-		- Loop: Checked
-	- **Note**: The **padding** variable and Custom String data in Music Mate are useful especially so for the scrolling filter, so there is "padding" in between sections. Additionally, the spaces must go in the front for the non-custom values, for it to scroll nicely with minimal duplication.
-
-- Add a new filter **Crop/Pad**
-	- If anything looks wonky in the preview, you can modify the padding and cropping here.
-		- Values which work for me (but not necessarily everyone):
-			- Relative: Checked
-			- Left: -50, Top: -20, Right: -50, Bottom: -20
-- Add a new filter **Render Delay**
-	- Set this to 0ms. The "real time" nature of the app will be off by about as low as 150ms and as high as 1.2s (for me, usually on the lower side, and poorly timed with a stopwatch...), so reducing display delay will make it feel more "seamless".
-	- If you want it more delayed, go ham!
-#### Other filters: 
-If you know what you're doing, you can go ham with any other filters. In the future I plan to add html output as well, and will have a section for that with custom CSS settings as examples.
-
 ## TODO Plan & Long-Term Goals
 - Features
 	- Add Themes
 	- Add Import Directory As Playlist
 	- Add more user settings, such as retain last played playlist and volume level
-	- Crossfading capability
+	- Cross-fading capability
 	- HTML File output (For advanced usage in OBS with custom CSS)
 	- Keyboard/Hotkey/Media Button interaction
 	- Auto Update
 	- Translation Ready UI Elements
-	- Store version number in UI app somewhere (and automate in build process)
-	- Setting to toggle on/off hardware accelaration
+	- Setting to toggle on/off hardware acceleration
 	
 - Other
 	- Actually spend effort to make the design look nice. Logo too.
-	- Local backend server to serve HTTP Get & Post requests to expand interaction options
-		- IPC Calls are setup, but no backend server. Change volume, manage playlist, swap playlist, get info etc.
-	- Touch Portal Plugin & Integration
-		- Support getting metadata for currently playing information
-		- Support basic player actions
+	- Touch Portal Related Components
 		- Create example page for plugin
 		- Create example page with Twitch integration
-			- Channel points examples to skip songs, change volume, etc.
-			- Send message in chat with press of button song information
-			- Event: Auto send message?
 
 ## Build from Source
 ### Dependencies 
@@ -158,6 +121,8 @@ or
 `npm run start:build` if you want to build and run immediately.
 ### Create Binaries
 `npm run make` Will create both the executable and create a Windows installer, both in the `out` directory.
+
+`npm run make:prod:all` Will create absolutely everything.
 
 ## Built Using
 
