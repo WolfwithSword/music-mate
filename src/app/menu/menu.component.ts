@@ -35,6 +35,8 @@ export class MenuComponent implements OnInit {
     currentPlaylist: Playlist;
     allPlaylists: Playlist[];
 
+    versionNbr: string = "";
+
     @ViewChild(MatMenuTrigger)
     contextMenu: MatMenuTrigger;
 
@@ -77,8 +79,13 @@ export class MenuComponent implements OnInit {
             electron.ipcRenderer.send("send-playlist-name-status", this.currentPlaylist.name, uuid);
         });
 
+        electron.ipcRenderer.on("send-app-version", async(event, version) => {
+            this.versionNbr = version;
+        });
+
         electron.ipcRenderer.send("get-playlists");
         electron.ipcRenderer.send("get-playlist", "Default");
+        electron.ipcRenderer.send("get-app-version");
     }
 
     closeApp() {

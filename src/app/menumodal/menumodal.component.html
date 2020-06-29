@@ -1,5 +1,13 @@
 <h2 mat-dialog-title>Metadata & Settings</h2>
 <mat-dialog-content class="text">
+
+    <div class="row padding-info">
+        <mat-checkbox [checked]="settings.enableHTTP" [(ngModel)]="settings.enableHTTP" (change)="updateSettings()"> Enable HTTP Backend? Port: 14585 (Requires Restart)</mat-checkbox>
+    </div>
+    <div class="row padding-info">
+        <mat-checkbox [checked]="settings.enableTP" [(ngModel)]="settings.enableTP" (change)="updateSettings()"> Enable TouchPortal Integration? (Requires Restart)</mat-checkbox>
+    </div>
+    <mat-divider></mat-divider>
     <div class="row padding-info">
         <div class="col">
             Set number of spaces to pad in front of each file's content.

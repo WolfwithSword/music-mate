@@ -24,8 +24,9 @@ module.paths.push(path.resolve(path.join(app.getAppPath(),
 
 let mainWindow;
 
-let global_settings = {'padAmt': 8, 'customString': ""};
-let currentSong = {'title':"", 'artist': "", 'path':""};
+let global_settings = {'padAmt': 8, 'customString': "", "enableHTTP": false, "enableTP":false};
+let default_settings = {'padAmt': 8, 'customString': "", "enableHTTP": false, "enableTP":false};
+let currentSong = {'title':"", 'artist': "", 'path':"", "link":""};
 let currentPlaylist = "";
 
 let allValidSongs = [];
@@ -56,17 +57,13 @@ function createWindow() {
     mainWindow.on('closed', function () {
         mainWindow = null
     })
-
-    require("./api-server")(api, ipcMain, mainWindow);
-    api.listen(port, () => console.log(`Starting up backend API: Listening at http://localhost:${port}`));
-
 }
 
 function init() {
     storage.get("settings.json", async(error, data) =>{
         if(data == null || data === {} ||
                 !Object.keys(data).includes("padAmt") || !Object.keys(data).includes("customString")) {
-            data =  {'padAmt': 8, 'customString': ""}
+            data = default_settings
             storage.set("settings.json",data, async(err)=> {
                 if (err)
                     throw err;
@@ -74,6 +71,11 @@ function init() {
             global_settings = data;
         }
         else {
+			for (var key of Object.keys(default_settings)) {
+				if (!data.hasOwnProperty(key)) {
+					data[key] = default_settings[key];
+				}
+			}
             global_settings = data;
         }
     });
@@ -139,34 +141,6 @@ function init() {
             throw error;
         }
     });
-    // WIP HTML Output. Add setTimeout to refresh
-    /*
-    fs.writeFile(storage.getDataPath() + "/custom.html", "", async (err)=> {
-        if (err) {
-            throw error;
-        }
-    });
-    fs.writeFile(storage.getDataPath() + "/songtitle.html", "", async (err)=> {
-        if (err) {
-            throw error;
-        }
-    });
-    fs.writeFile(storage.getDataPath() + "/songartist.html", "", async (err)=> {
-        if (err) {
-            throw error;
-        }
-    });
-    fs.writeFile(storage.getDataPath() + "/songinfo.html", "", async (err)=> {
-        if (err) {
-            throw error;
-        }
-    });
-    fs.writeFile(storage.getDataPath() + "/playlistname.html", "", async (err)=> {
-        if (err) {
-            throw error;
-        }
-    });
-    */
 }
 
 init();
@@ -179,13 +153,39 @@ ipcMain.on("init", async(event) => {
         event.preventDefault();
         require('electron').shell.openExternal(url);
     });
+	
+	if(global_settings.enableHTTP) {
+		enableHTTP();
+	}
+	if(global_settings.enableTP) {
+		enableTPIntegration();
+	}
+});
 
-    require("./tp")(ipcMain, mainWindow);
-})
+ipcMain.on("get-app-version", async(event) => {
+    mainWindow.webContents.send("send-app-version", app.getVersion());
+});
 
 ipcMain.on("get-settings", async(event) => {
     mainWindow.webContents.send("send-settings", global_settings);
-})
+});
+
+function enableHTTP() {
+	require("./api-server")(api, ipcMain, mainWindow);
+    api.listen(port, () => console.log(`Starting up backend API: Listening at http://localhost:${port}`));
+}
+
+function enableTPIntegration() {
+	require("./tp")(ipcMain, mainWindow);
+}
+
+ipcMain.on("enable-http-backend", async(event) => {
+    enableHTTP();
+});
+
+ipcMain.on("enable-tp-integration", async(event) => {
+    enableTPIntegration();
+});
 
 ipcMain.on("update-settings", async(event, settings) => {
     let keys = Object.keys(settings);

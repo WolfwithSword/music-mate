@@ -29,7 +29,9 @@ export class MenumodalComponent implements OnInit {
 
     settings = {
         padAmt: 8,
-        customString: ""
+        customString: "",
+        enableHTTP: false,
+        enableTP: false,
     }
 
     constructor(public dialogRef: MatDialogRef<MenumodalComponent>, private cdr: ChangeDetectorRef) {

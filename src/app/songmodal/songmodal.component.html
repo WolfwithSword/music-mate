@@ -20,7 +20,7 @@
                     <button (click)="openFileDialog()" mat-raised-button color="accent">Choose Song</button>
                 </div>
             </mat-grid-tile>
-            <mat-grid-tile colspan="2" rowspan="2">
+            <mat-grid-tile colspan="2" rowspan="1">
                 <b>{{selectedSong}}</b>
             </mat-grid-tile>
             <mat-grid-tile class="grid-label">
@@ -49,6 +49,21 @@
                       <mat-form-field class="input-full-width">
                         <mat-label>Artist (optional)</mat-label>
                         <textarea matInput [(ngModel)]="song.artist" placeholder="Artist..." name="artist"></textarea>
+                      </mat-form-field>
+                    </form>
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="grid-label">
+                <div style="width:100%">
+                    Link
+                </div>
+            </mat-grid-tile>
+            <mat-grid-tile class="grid-value">
+                <div style="width:100%">
+                    <form class="input-form">
+                      <mat-form-field class="input-full-width">
+                        <mat-label>Link (Optional)</mat-label>
+                        <textarea matInput [(ngModel)]="song.link" placeholder="http..." name="link"></textarea>
                       </mat-form-field>
                     </form>
                 </div>

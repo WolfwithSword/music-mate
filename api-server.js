@@ -76,6 +76,10 @@ module.exports = function(api, ipcMain, mainWindow){
         sendStatus(status, uuid);
     });
 
+    ipcMain.on("send-song-link", async(event, status, uuid) => {
+		sendStatus(status, uuid); 
+	});
+
 
     /**  Play **/
     api.get('/play', function(req, res){
@@ -201,6 +205,9 @@ module.exports = function(api, ipcMain, mainWindow){
         callIPC(req, res, "get-song-status-duration");
     });
 
+    api.get("/song/link", function (req, res) {
+        callIPC(req, res, "get-song-link");
+    });
 
     /** Other **/
     api.get("/loop/status", function (req, res) {

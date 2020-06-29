@@ -79,6 +79,9 @@ module.exports = function(ipcMain, mainWindow){
 				sendState(value, "current-duration");
 			});
 
+            ipcMain.on("send-song-link", async(event, value) => {
+				sendState(value, "song-link");
+			});
         });
 
         socket.on("ready", function() {
@@ -115,6 +118,7 @@ module.exports = function(ipcMain, mainWindow){
             mainWindow.webContents.send("get-song-status-name");
             mainWindow.webContents.send("get-song-status-artist");
             mainWindow.webContents.send("get-song-status-duration");
+            mainWindow.webContents.send("get-song-link");
             sendState("0:00", "current-duration");
         }
 

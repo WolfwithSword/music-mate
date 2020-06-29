@@ -7,4 +7,6 @@ export class Song {
     path: string;
     
     duration: string;
+    
+    link: string = "";
 }

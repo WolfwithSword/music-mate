@@ -34,6 +34,7 @@ export class SongmodalComponent implements OnInit {
         this.song.title = "";
         this.song.path = "";
         this.song.artist = "";
+        this.song.link = "";
         this.fileChosen = false;
 
         electron.ipcRenderer.on("selected-file", async(event, file, metadata) => {

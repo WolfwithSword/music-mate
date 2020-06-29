@@ -70,6 +70,7 @@ export class PlayerComponent implements OnInit {
                 electron.ipcRenderer.send("send-song-status-name", this.activeSong[0].title);
                 electron.ipcRenderer.send("send-song-status-artist", this.activeSong[0].artist);
                 electron.ipcRenderer.send("send-song-status-duration", this.activeSong[0].duration);
+                electron.ipcRenderer.send("send-song-link", this.activeSong[0].hasOwnProperty('link') ? this.activeSong[0].link : "");
                 electron.ipcRenderer.send("send-current-duration", "0:00");
             }
             else {
@@ -171,6 +172,9 @@ export class PlayerComponent implements OnInit {
         electron.ipcRenderer.on("get-song-status", async(event, uuid) => {
             electron.ipcRenderer.send("send-song-status", this.activeSong[0], uuid);
         });
+        electron.ipcRenderer.on("get-song-link", async(event, uuid) => {
+            electron.ipcRenderer.send("send-song-link", this.activeSong[0].hasOwnProperty('link') ? this.activeSong[0].link : "", uuid);
+        });
     }
 
     changeVolumeValue(value) {
@@ -254,6 +258,7 @@ export class PlayerComponent implements OnInit {
         electron.ipcRenderer.send("send-song-status-name", this.activeSong[0].title, null);
         electron.ipcRenderer.send("send-song-status-artist", this.activeSong[0].artist, null);
         electron.ipcRenderer.send("send-song-status-duration", this.activeSong[0].duration, null);
+        electron.ipcRenderer.send("send-song-link", this.activeSong[0].hasOwnProperty('link') ? this.activeSong[0].link : "", null);
     }
 
     adjustArray() {

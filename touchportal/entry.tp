@@ -1,6 +1,6 @@
 {
   "sdk":2,
-  "version":1,
+  "version":2,
   "name":"MusicMate TP Plugin",
   "id":"music_mate_14585",
   "configuration" : {
@@ -180,6 +180,12 @@
 		  ],
         },
         {
+          "id":"mm-song-link",
+          "type":"text",
+          "desc":"MM Current Song Link",
+          "default":""
+        },
+        {
           "id":"mm-is-playing",
           "type":"choice",
           "desc":"Is MusicMate playing a song?",
@@ -202,7 +208,7 @@
 		{
           "id":"mm-mute-status",
           "type":"choice",
-          "desc":"Is the Volume Muted?",
+          "desc":"Is MM Volume Muted?",
           "default":"false",
           "valueChoices": [
             "true",
@@ -212,37 +218,37 @@
 		{
           "id":"mm-volume-level",
           "type":"text",
-          "desc":"The current volume level",
+          "desc":"MM Current Volume Level",
           "default":"50"
         },
 		{
           "id":"mm-current-duration",
           "type":"text",
-          "desc":"The current time progress in the current song",
+          "desc":"MM The current time progress in the current song",
           "default":"0:00"
         },
 		{
           "id":"mm-playlist-name",
           "type":"text",
-          "desc":"Current Playlist",
+          "desc":"MM Current Playlist",
           "default":"Default"
         },
 		{
           "id":"mm-song-name",
           "type":"text",
-          "desc":"Current Song Name",
+          "desc":"MM Current Song Name",
           "default":"None"
         },
 		{
           "id":"mm-song-artist",
           "type":"text",
-          "desc":"Current Song Artist",
+          "desc":"MM Current Song Artist",
           "default":"None"
         },
 		{
           "id":"mm-song-duration",
           "type":"text",
-          "desc":"Current Song Duration",
+          "desc":"MM Current Song Duration",
           "default":"0:00"
         },
       ]
