@@ -3,6 +3,13 @@ To enable the TouchPortal integration, open the menu settings and click the chec
 
 **Note**:  Open TouchPortal before MusicMate, or restart MusicMate after TP is opened, otherwise the integration will not pair.
 
+## Installing the Plugin
+
+Go to the [Releases](https://github.com/WolfwithSword/music-mate/releases) tab to download the latest version of the plugin.
+`musicmate.tpp`
+
+Import as a normal touchPortal plugin by selecting the wrench icon and selecting "import plugin".
+
 ## Actions/Buttons
 - Toggle Play/Pause
 - Play
@@ -48,8 +55,4 @@ To enable the TouchPortal integration, open the menu settings and click the chec
 
 ## Examples
 
-### Example Pages
-TODO
-
-### Example Twitch Pages
-TODO
+[See the Pages folder for examples](https://github.com/WolfwithSword/music-mate/tree/master/touchportal/pages)

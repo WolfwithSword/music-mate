@@ -146,26 +146,14 @@ module.exports = function(api, ipcMain, mainWindow){
         callIPCValue(req, res, "modify-volume", -req.params.amount);
     });
 
-    /**api.post("/volume/up", amount, function (req, res) {
-        callIPCValue(req, res, "modify-volume", amount);
+    api.get("/volume/:value(\\d+)", function (req, res) {
+        mainWindow.webContents.send("set-volume", req.params.value);
+        res.send(req.params.value.toString());
     });
 
-    api.post("/volume/down", amount, function (req, res) {
-        callIPCValue(req, res, "modify-volume", -amount);
-    });
-
-    api.post("/volume/set", amount, function (req, res) {
-        mainWindow.webContents.send("set-volume", amount);
-    });**/
-
-    api.get("/volume/:amount(\\d+)", function (req, res) {
-        mainWindow.webContents.send("set-volume", req.params.amount);
-        res.send(req.params.amount.toString());
-    });
-
-    api.get("/volume/set/:amount(\\d+)", function (req, res) {
-        mainWindow.webContents.send("set-volume", req.params.amount);
-        res.send(req.params.amount.toString());
+    api.get("/volume/set/:value(\\d+)", function (req, res) {
+        mainWindow.webContents.send("set-volume", req.params.value);
+        res.send(req.params.value.toString());
     });
 
     api.get("/volume/mute", function(req, res){
