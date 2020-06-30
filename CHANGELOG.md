@@ -1,17 +1,30 @@
+
 # Changelog
 
 ## Unreleased
 
-### *1.0.1*
+### *1.1.0*
 
 #### Added
+- Link metadata property added to songs. This is to store the source of the song, such as a spotify, youtube or other link.
+- Touch Portal Integration & Example Pages.
+- HTTP Backend API Service.
+- New IPC calls for controlling and fetching data for HTTP service and TP plugin.
+- New README files for various components and features
 
 #### Changed
 
+- Song Model now has "Link" property. Retroactively, songs will have this field empty.
+- Project Structure to support API server and TP integration plugin
+- Tooltip on logo now displays the app version number.
+
 ### Fixed
+- N/A
 
 ### Removed
-
+- Commented code regarding future features such as HTML file output and hardware acceleration.
+	- HTML file output will be attempted again.
+	- Hardware Acceleration toggle is in the far backlog. Issues were found with order of operations.
 
 ## Released
 
