@@ -1,7 +1,7 @@
 const storage = require("electron-json-storage");
 var fs = require("fs");
 
-module.exports = function(api, ipcMain, mainWindow){
+module.exports = function(api, ipcMain, mainWindow, logger){
 
     var responses = {};
 

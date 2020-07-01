@@ -7,6 +7,17 @@ const {
     dialog
 } = require('electron')
 if (require('electron-squirrel-startup')) return app.quit();
+
+const logger =  require('electron-log');
+
+try {
+    require('update-electron-app')({
+        logger: logger
+    });
+} catch (error) {
+    logger.info("Could not start auto-update process");
+}
+
 const url = require("url");
 const path = require("path");
 var os = require('os');
@@ -147,7 +158,6 @@ init();
 
 ipcMain.on("init", async(event) => {
     init();
-    //console.log(storage.getDataPath());
 
     mainWindow.webContents.on("new-window", async(event, url) => {
         event.preventDefault();
@@ -171,12 +181,12 @@ ipcMain.on("get-settings", async(event) => {
 });
 
 function enableHTTP() {
-	require("./api/api-server")(api, ipcMain, mainWindow);
-    api.listen(port, () => console.log(`Starting up backend API: Listening at http://localhost:${port}`));
+	require("./api/api-server")(api, ipcMain, mainWindow, logger);
+    api.listen(port, () => logger.info(`Starting up backend API: Listening at http://localhost:${port}`));
 }
 
 function enableTPIntegration() {
-	require("./touchportal/tp")(ipcMain, mainWindow);
+	require("./touchportal/tp")(ipcMain, mainWindow, logger);
 }
 
 ipcMain.on("enable-http-backend", async(event) => {
@@ -518,11 +528,12 @@ ipcMain.on('open-file-dialog', async(event) => {
         if (files) {
             let metadata = {};
             var parser = mm(fs.createReadStream(files.filePaths[0]),  (err, md) => {
-              if( md ) {
-                metadata = md;
-              }
-               console.log(metadata);
-              mainWindow.webContents.send('selected-file', files.filePaths[0], metadata);
+                if( md ) {
+                    metadata = md;
+                }
+                logger.info("Fetching Metadata:")
+                logger.info(metadata);
+                mainWindow.webContents.send('selected-file', files.filePaths[0], metadata);
             });
         }
     });

@@ -3,6 +3,7 @@
   "version": "1.1.0",
   "author": "WolfwithSword",
   "description": "Local Music Player with data output files for OBS Text Display",
+  "repository": "https://github.com/WolfwithSword/music-mate",
   "main": "main.js",
   "scripts": {
     "ng": "ng",
@@ -32,6 +33,7 @@
     "@angular/router": "~9.1.9",
     "bootstrap": "^4.5.0",
     "electron-json-storage": "^4.1.8",
+    "electron-log": "^4.2.2",
     "electron-squirrel-startup": "^1.0.0",
     "express": "^4.17.1",
     "get-audio-duration": "^2.0.2",
@@ -43,6 +45,7 @@
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "update-electron-app": "^1.5.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {

@@ -94,18 +94,17 @@ The custom file can use the following variables to create a custom message. Any 
 - Features
 	- Add Themes
 	- Add Import Directory As Playlist
+	- Add Edit Song actions
 	- Add more user settings, such as retain last played playlist and volume level
 	- Cross-fading capability
 	- HTML File output (For advanced usage in OBS with custom CSS)
 	- Keyboard/Hotkey/Media Button interaction
-	- Auto Update
 	- Translation Ready UI Elements
 	- Setting to toggle on/off hardware acceleration
 	
 - Other
 	- Actually spend effort to make the design look nice. Logo too.
 	- Touch Portal Related Components
-		- Create example page for plugin
 		- Create example page with Twitch integration
 
 ## Build from Source

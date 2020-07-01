@@ -2,7 +2,7 @@ const storage = require("electron-json-storage");
 var fs = require("fs");
 const net = require("net");
 
-module.exports = function(ipcMain, mainWindow){
+module.exports = function(ipcMain, mainWindow, logger){
     try {
 
         let pairJSON = {
@@ -35,14 +35,14 @@ module.exports = function(ipcMain, mainWindow){
             }
         }
 
-        console.log("Attempting socket connection to TouchPortal...")
+        logger.info("Attempting socket connection to TouchPortal...")
         socket.setEncoding("utf8");
         socket.connect(12136, "127.0.0.1", function () {
         });
 
         socket.on('connect',  function () {
-            console.log("[open] Connection Established to TouchPortal");
-            console.log("Pairing...");
+            logger.info("[open] Connection Established to TouchPortal");
+            logger.info("Pairing...");
             socket.write(JSON.stringify(pairJSON)+"\n");
 
 			/** IPC Main Calls **/
@@ -87,7 +87,7 @@ module.exports = function(ipcMain, mainWindow){
         socket.on("ready", function() {
             /** Override for now until status of pair success is back**/
             setTimeout( () =>{
-                console.log("[paired] Successfully paired with TouchPortal");
+                logger.info("[paired] Successfully paired with TouchPortal");
                 connected = true;
                 sendState(connected, "connected");
                 init();
@@ -101,13 +101,13 @@ module.exports = function(ipcMain, mainWindow){
 
         socket.on('close', function (event) {
             if(event.wasClean) {
-                console.log(`[close] Connection closed with TouchPortal. ${event}`);
+                logger.warn(`[close] Connection closed with TouchPortal. ${event}`);
             }
             connected = false;
         });
 
         socket.on('error',function (err) {
-            console.log(`[error] ${err}`);
+            logger.error(`[error] ${err}`);
         });
 
         function init() {
@@ -140,7 +140,7 @@ module.exports = function(ipcMain, mainWindow){
         function handleMessage(event) {
             event = JSON.parse(event);
             if(event.hasOwnProperty("status" && event.status == "paired")) {
-                console.log("[paired] Successfully paired with TouchPortal");
+                logger.info("[paired] Successfully paired with TouchPortal");
                 connected = true;
                 sendState(connected, "connected");
                 init();
@@ -157,7 +157,7 @@ module.exports = function(ipcMain, mainWindow){
                         handleAction(event);
                         break;
                     case "closePlugin":
-                        console.log("[close] Close connection request sent by TouchPortal");
+                        logger.info("[close] Close connection request sent by TouchPortal");
                         break;
                 }
             }
@@ -180,6 +180,6 @@ module.exports = function(ipcMain, mainWindow){
             }
         }
     } catch (error) {
-        console.log(error);
+        logger.error(error);
     }
 }
