@@ -1,0 +1,8 @@
+{
+  "win32-x64-prod": {
+    "readme": "",
+    "update": "https://github.com/WolfwithSword/music-mate/releases/download/1.0.0",
+    "install": "https://github.com/WolfwithSword/music-mate/releases/download/1.0.0/MusicMateSetupv1.0.0.exe",
+    "version": "1.0.0"
+  }
+}
