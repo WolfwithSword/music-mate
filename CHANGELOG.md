@@ -7,7 +7,7 @@
 ## Released
 
 
-### *1.1.0*
+### *1.1.0* - 2020-07-06
 
 #### Added
 - Link metadata property added to songs. This is to store the source of the song, such as a spotify, youtube or other link.
