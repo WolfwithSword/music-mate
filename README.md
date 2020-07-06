@@ -104,8 +104,6 @@ The custom file can use the following variables to create a custom message. Any 
 	
 - Other
 	- Actually spend effort to make the design look nice. Logo too.
-	- Touch Portal Related Components
-		- Create example page with Twitch integration
 
 ## Build from Source
 ### Dependencies 

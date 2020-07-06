@@ -84,17 +84,6 @@ module.exports = function(ipcMain, mainWindow, logger){
 			});
         });
 
-        socket.on("ready", function() {
-            /** Override for now until status of pair success is back**/
-            setTimeout( () =>{
-                logger.info("[paired] Successfully paired with TouchPortal");
-                connected = true;
-                sendState(connected, "connected");
-                init();
-            }, 1000);
-
-        })
-
         socket.on('data', function (event) {
             handleMessage(event);
         });
@@ -139,7 +128,7 @@ module.exports = function(ipcMain, mainWindow, logger){
 
         function handleMessage(event) {
             event = JSON.parse(event);
-            if(event.hasOwnProperty("status" && event.status == "paired")) {
+            if(event.hasOwnProperty("status") && event.status == "paired") {
                 logger.info("[paired] Successfully paired with TouchPortal");
                 connected = true;
                 sendState(connected, "connected");
