@@ -101,6 +101,7 @@ The custom file can use the following variables to create a custom message. Any 
 	- Keyboard/Hotkey/Media Button interaction
 	- Translation Ready UI Elements
 	- Setting to toggle on/off hardware acceleration
+  - Centre the play buttons... I only notice they are off-centre after half a year...
 	
 - Other
 	- Actually spend effort to make the design look nice. Logo too.
